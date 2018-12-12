@@ -7,12 +7,12 @@ public class Player {
 	
 	
 	//Constructores
-	public Player(String equipo) {
-		this.equipo = equipo;
+	public Player() {
+		
 	}
 	
-	public Player() {
-	
+	public Player(String equipo) {
+		this.equipo = equipo;
 	}
 
 	//Getters y setters
