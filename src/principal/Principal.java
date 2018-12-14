@@ -1,15 +1,13 @@
 package principal;
 
-import view.Menus;
+import view.Menu;
 
 public class Principal {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Menus m = new Menus();
-		
-		
-		
+		Menu m = new Menu();
+	
 		m.imprimirMenuBienv();
 
 	}

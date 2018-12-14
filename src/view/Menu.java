@@ -1,12 +1,12 @@
 package view;
 
-public class Menus {
+public class Menu {
 	
 	
 	
 	
 	
-	public Menus() {
+	public Menu() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
