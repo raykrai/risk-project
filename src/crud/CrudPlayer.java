@@ -2,8 +2,12 @@ package crud;
 
 import data.DataPlayer;
 import model.Player;
+import model.Troop;
 
 public class CrudPlayer {
+	
+	Player p;
+	Troop tp;
 	
 	//Constructor
 	public CrudPlayer() {
@@ -13,15 +17,13 @@ public class CrudPlayer {
 	
 	//Métodos
 	public Player createPlayer(String equipo) {
-		Player p=new Player(equipo);
+		p.setEquipo(equipo);
 		
 		return p;	
 	}
 	
-	public void deletePlayer(DataPlayer arrayJugadores,int cantTropas) {
-		if(cantTropas==0) {
-			
-	}
+	public void deletePlayer(DataPlayer arrayJugadores) {
+		
 
 }
 
