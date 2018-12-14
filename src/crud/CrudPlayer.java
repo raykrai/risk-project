@@ -16,15 +16,10 @@ public class CrudPlayer {
 	
 	
 	//Métodos
-	public Player createPlayer(String equipo) {
-		p.setEquipo(equipo);
-		
-		return p;	
-	}
 	
 	public void deletePlayer(DataPlayer arrayJugadores) {
 		
 
-}
+	}
 
 }
