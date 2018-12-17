@@ -6,8 +6,7 @@ public class Terrain {
 	
 	private String tipo;
 	private int canT;
-	
-	//TODO Preguntar a Ángel si es buena idea tener un atributo equipo en terreno.
+	private Troop t;
 	private String equipo;
 	
 	//Constructores
@@ -30,15 +29,21 @@ public class Terrain {
 		this.tipo = tipo;
 	}
 	
-	
-	//toString
-	
 	public int getCanT() {
 		return canT;
 	}
 
 	public void setCanT(int canT) {
 		this.canT = canT;
+	}
+	
+	
+	public Troop getT() {
+		return t;
+	}
+
+	public void setT(Troop t) {
+		this.t = t;
 	}
 
 	public String getEquipo() {
@@ -48,7 +53,8 @@ public class Terrain {
 	public void setEquipo(String equipo) {
 		this.equipo = equipo;
 	}
-
+	
+	//toString
 	@Override
 	public String toString() {
 		return "Terrain [tipo=" + tipo + "]";
