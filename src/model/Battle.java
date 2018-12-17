@@ -8,7 +8,7 @@ public class Battle {
 	
 	//Atributos
 	
-	private int casilla[][];
+	private Terrain casilla[][];
 	
 	//Constructor
 	
@@ -16,18 +16,19 @@ public class Battle {
 		
 	}
 	
-	public Battle(int[][] casilla) {
+	public Battle(Terrain[][] casilla) {
 		super();
 		this.casilla = casilla;
 	}
-	
+
 	//Getters y setters
 	
-	public int[][] getCasilla() {
+
+	public Terrain[][] getCasilla() {
 		return casilla;
 	}
 
-	public void setCasilla(int[][] casilla) {
+	public void setCasilla(Terrain[][] casilla) {
 		this.casilla = casilla;
 	}
 	

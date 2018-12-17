@@ -2,10 +2,6 @@ package view;
 
 public class Menu {
 	
-	
-	
-	
-	
 	public Menu() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -64,5 +60,13 @@ public class Menu {
 	public void imprimirInicioPartida() {
 		System.out.println("Lo primero es lo primero... hay dos facciones: Roja y Azul, elegid a suerte quién es quién y pulsad 1 cua");
 		System.out.println("");
+	}
+	
+	public void imprimirMenuCombate() {
+		
+		System.out.println("¿Qué deseas hacer?");
+		System.out.println("1. Movilizar tropas");
+		System.out.println("2. Atacar tropas");
+		System.out.println("3. Pasar turno");
 	}
 }

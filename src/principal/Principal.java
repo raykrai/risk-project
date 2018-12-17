@@ -1,6 +1,10 @@
 package principal;
 
+import controller.ControllerPartida;
+import data.DataBattle;
+import model.Battle;
 import utilidades.Leer;
+import view.Mapa;
 import view.Menu;
 
 public class Principal {
@@ -9,9 +13,12 @@ public class Principal {
 		int turno = 2, opt, cero = 0, optC;
 		String turnoActivo = "R";
 		
-		//TODO Ver la manera de controlar la finalización de la partida sin usar una variable aquí
-		boolean isFinished = false;
+		DataBattle dB = new DataBattle();
+		Battle b = new Battle(dB.getCasilla());
+		Mapa map = new Mapa();
 		Menu m = new Menu();
+		
+		ControllerPartida cP = new ControllerPartida();
 		
 		//Se muestra el menú
 		m.imprimirMenuBienv();
@@ -31,19 +38,45 @@ public class Principal {
 					
 				case 1:
 					
-					System.out.println("Lo primero es lo primero... hay dos facciones: Roja y Azul");
+					System.out.println("Lo primero es lo primero... hay dos facciones: RED (R) y BLUE (B)");
 					
-					//m.imprimirMapa;
+					map.imprimirMapa(b);
 					
-					//método para elegir las posiciones iniciales
+					//TODO método para elegir las posiciones iniciales del jugador red
 					
-					//método para elegir las posiciones iniciales del segundo jugador
+					//TODO método para elegir las posiciones iniciales del segundo jugador, blue
 					
 					do {
 						
-						//m.mostrarMenuCombate
+						do {
+							System.out.println("Es el turno del jugador "+turnoActivo);
+							m.imprimirMenuCombate();
+							optC = Leer.datoInt();
 						
-						optC = Leer.datoInt();
+							switch (optC) {
+								
+								case 1:
+								
+									//TODO meter bucle para mover 
+									break;
+								
+								case 2:
+								
+									
+									break;
+								
+								case 3:
+									
+									break;
+									
+								default:
+								
+									System.out.println("¡Introduce una acción válida!");
+								
+									break;
+							}
+							
+						} while (optC != 3);
 						
 						//TODO Aquí controlo los turnos
 						if (turno%2 == cero) {
@@ -55,8 +88,8 @@ public class Principal {
 						}
 						
 						turno++;
-						
-					} while (isFinished);
+					
+					} while (!cP.comprobarGanador(b.getCasilla()));
 					break;
 				case 2:
 					

@@ -15,10 +15,14 @@ public class Terrain {
 		
 	}
 	
-	public Terrain(String tipo) {
+	public Terrain(String tipo, int canT, Troop t, String equipo) {
+		super();
 		this.tipo = tipo;
+		this.canT = canT;
+		this.t = t;
+		this.equipo = equipo;
 	}
-	
+
 	//Getters and setters
 	
 	public String getTipo() {
@@ -57,6 +61,6 @@ public class Terrain {
 	//toString
 	@Override
 	public String toString() {
-		return "Terrain [tipo=" + tipo + "]";
+		return tipo + "" + canT + "" + t.getTipo() + equipo;
 	}	
 }
