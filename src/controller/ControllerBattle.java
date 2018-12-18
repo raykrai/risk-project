@@ -2,7 +2,7 @@ package controller;
 
 import java.util.Random;
 
-public class ControllerRealizarCombate {
+public class ControllerBattle {
 	
 	public int tirarDado(){
 		Random r = new Random (System.nanoTime());
