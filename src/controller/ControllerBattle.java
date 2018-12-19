@@ -36,7 +36,8 @@ public class ControllerBattle {
 	
 	
 	public Terrain moverTropas(int filaAct, int columnaAct, Terrain casilla[][], int ladoMov) {
-		Terrain posicionAct = casilla[filaAct-1][columnaAct-1];
+		Terrain posicionAct=casilla[filaAct][columnaAct];
+		int uno=1, dos=2;
 		
 		for (int i = 0; i<casilla.length; i++) {
 			
@@ -45,19 +46,19 @@ public class ControllerBattle {
 				switch(ladoMov) {
 				
 				case 1:	//Dcha
-					posicionAct = casilla[filaAct][columnaAct+1];	
+					posicionAct = casilla[filaAct-uno][columnaAct];	
 					break;
 				
 				case 2:	//Debajo
-					posicionAct = casilla[filaAct+1][columnaAct];
+					posicionAct = casilla[filaAct][columnaAct-uno];
 					break;
 					
 				case 3:	//Izq
-					posicionAct = casilla[filaAct][columnaAct-1];
+					posicionAct = casilla[filaAct-uno][columnaAct-dos];
 					break;
 					
 				case 4:	//Arriba
-					posicionAct = casilla[filaAct-1][columnaAct];
+					posicionAct = casilla[filaAct-dos][columnaAct-uno];
 					break;
 					
 				default:
@@ -74,10 +75,9 @@ public class ControllerBattle {
 	
 	public boolean comprobarDistancia(int filaAct, int columnaAct, Terrain casilla[][], int filaAtaque, int columnaAtaque) {
 		boolean distancia=false;
-		Terrain posicionAct = casilla[filaAct-1][columnaAct-1];
-		Terrain ataque= casilla[filaAtaque-1][columnaAtaque-1];
+		int uno=1, dos=2;
 		
-		if(casilla[filaAct+1][columnaAct]==casilla[filaAtaque][columnaAtaque] || casilla[filaAct-1][columnaAct]==casilla[filaAtaque][columnaAtaque] || casilla[filaAct][columnaAct+1]==casilla[filaAtaque][columnaAtaque] || casilla[filaAct][columnaAct-1]==casilla[filaAtaque][columnaAtaque]) {
+		if(casilla[filaAct-uno][columnaAct]==casilla[filaAtaque][columnaAtaque] || casilla[filaAct][columnaAct-uno]==casilla[filaAtaque][columnaAtaque] || casilla[filaAct-uno][columnaAct-dos]==casilla[filaAtaque][columnaAtaque] || casilla[filaAct-dos][columnaAct-uno]==casilla[filaAtaque][columnaAtaque]) {
 			distancia=true;
 		}
 		
