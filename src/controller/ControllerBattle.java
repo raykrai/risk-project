@@ -30,6 +30,22 @@ public class ControllerBattle {
 	}
 	
 	
+	public boolean atacarTropas(int filaAct, int columnaAct, Terrain casilla[][], int filaAtaque, int columnaAtaque) {
+		boolean atacar=false;
+		
+		if(comprobarDistancia(filaAct,columnaAct,casilla,filaAtaque,columnaAtaque)==true) {
+		
+		
+		
+			
+			atacar=true;
+		}else {
+			atacar=false;
+		}
+		
+		return atacar;
+	}
+	
 	
 	
 	
