@@ -102,17 +102,6 @@ public class ControllerBattle {
 	}
 	
 	
-	public boolean comprobarTipoTropas(Troop t) {
-		boolean tipoInf=false;
-		String tropa = "infanteria";
-		
-		if(t.getTipo().equals(tropa)) {
-			tipoInf=true;
-		}
-		
-		return tipoInf;
-		
-	}
 	
 	
 
