@@ -3,6 +3,7 @@ package controller;
 import java.util.Random;
 
 import model.Terrain;
+import model.Troop;
 
 
 public class ControllerBattle {
@@ -101,10 +102,15 @@ public class ControllerBattle {
 	}
 	
 	
-	public boolean comprobarTipoTropas() {
-		boolean tipo=false;
+	public boolean comprobarTipoTropas(Troop t) {
+		boolean tipoInf=false;
+		String tropa = "infanteria";
 		
-		return tipo;
+		if(t.getTipo().equals(tropa)) {
+			tipoInf=true;
+		}
+		
+		return tipoInf;
 		
 	}
 	
