@@ -69,4 +69,12 @@ public class Menu {
 		System.out.println("2. Atacar tropas");
 		System.out.println("3. Pasar turno");
 	}
+	
+	public void imprimirOpcionesMovimiento() {
+		System.out.println("¿Hacia dónde quiere mover las tropas?");
+		System.out.println("1. Derecha");
+		System.out.println("2. Debajo");
+		System.out.println("3. Izquierda");
+		System.out.println("4. Arriba");
+	}
 }

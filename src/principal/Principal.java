@@ -3,6 +3,7 @@ package principal;
 import controller.ControllerPartida;
 import data.DataBattle;
 import model.Battle;
+import model.Terrain;
 import utilidades.Leer;
 import view.Mapa;
 import view.Menu;
@@ -10,7 +11,7 @@ import view.Menu;
 public class Principal {
 
 	public static void main(String[] args) {
-		int turno = 2, opt, cero = 0, optC;
+		int turno = 2, opt, cero = 0, optC, filaAct=0, columnaAct=0, ladoMov=0;
 		String turnoActivo = "R";
 		
 		DataBattle dB = new DataBattle();
@@ -55,8 +56,17 @@ public class Principal {
 						
 							switch (optC) {
 								
-								case 1:
-								
+								case 1:	//Mover tropas
+									System.out.println("Indique la topa que desea movilizar:");
+									System.out.println("Fila");
+									filaAct=Leer.datoInt();
+									System.out.println("Columna");
+									columnaAct=Leer.datoInt();
+									
+									m.imprimirOpcionesMovimiento();
+									ladoMov=Leer.datoInt();
+									
+									
 									//TODO meter bucle para mover 
 									break;
 								
