@@ -7,13 +7,31 @@ import model.Terrain;
 
 public class ControllerBattle {
 	
-	public int tirarDado(){
+	public int tirarDadox1(){
 		Random r = new Random (System.nanoTime());
 		int resul=0,hasta=6,desde=1;
 		resul=r.nextInt(hasta-desde+1)+desde;
 		return resul;
 		
 	}
+	
+	public int tirarDadox2() {
+		Random r = new Random (System.nanoTime());
+		int resul=0,hasta=12,desde=1;
+		resul=r.nextInt(hasta-desde+1)+desde;
+		return resul;
+	}
+	
+	public int tirarDadox3() {
+		Random r = new Random (System.nanoTime());
+		int resul=0,hasta=18,desde=1;
+		resul=r.nextInt(hasta-desde+1)+desde;
+		return resul;
+	}
+	
+	
+	
+	
 	
 	
 	
