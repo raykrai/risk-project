@@ -39,9 +39,7 @@ public class Principal {
 					
 				case 1:
 					
-					System.out.println("Lo primero es lo primero... hay dos facciones: RED (R) y BLUE (B)");
-					
-					map.imprimirMapa(b);
+					System.out.println("Lo primero es lo primero... hay dos facciones: RED (R) y BLUE (B)\n");
 					
 					//TODO método para elegir las posiciones iniciales del jugador red
 					
@@ -50,6 +48,9 @@ public class Principal {
 					do {
 						
 						do {
+							
+							map.imprimirMapa(b);
+							
 							System.out.println("Es el turno del jugador "+turnoActivo);
 							m.imprimirMenuCombate();
 							optC = Leer.datoInt();
