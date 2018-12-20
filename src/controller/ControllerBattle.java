@@ -102,6 +102,26 @@ public class ControllerBattle {
 	}
 	
 	
+	public int comprobarTerreno(Terrain casilla[][], int filaAct, int columnaAct) {
+		int vent=1, uno=1;
+		Troop inf=new Troop("Inf");
+		
+		
+		for (int i = 0; i<casilla.length; i++) {
+			
+			for (int j = 0; j <casilla[i].length; j++) {
+		
+		if(casilla[filaAct-uno][columnaAct-uno].getT().getTipo(Inf) && casilla[filaAct-uno][columnaAct-uno].getTipo(Mon)) {
+			vent=2;
+		}
+		
+			}
+		}
+		
+		return vent;
+	}
+	
+	
 	
 	
 
