@@ -30,21 +30,33 @@ public class ControllerBattle {
 		return resul;
 	}
 	
-	
-	public boolean atacarTropas(int filaAct, int columnaAct, Terrain casilla[][], int filaAtaque, int columnaAtaque) {
-		boolean atacar=false;
+	//Cuando atacas devuelves un int que indica tu tirada.
+	public int atacarTropas(int filaAct, int columnaAct, Terrain casilla[][], int filaAtaque, int columnaAtaque) {
 		
-		if(comprobarDistancia(filaAct,columnaAct,casilla,filaAtaque,columnaAtaque)==true) {
+		int cien =100;
+		int cero=0;
+		int tirada=0;
 		
 		
+		
+		
+		if(comprobarDistancia(filaAct,columnaAct,casilla,filaAtaque,columnaAtaque)==true)  {
+			
+			if(casilla[filaAct-1][columnaAct-1].getTipo().equals("Artilleria")){
+				
+				if(casilla[filaAtaque-1][columnaAtaque-1].getT().getTipo().equals("Infanteria")) {
+					tirada=tirarDadox1()*cien;
+				}else {
+					tirada=tirarDadox1()*cero;
+				}
+				
+			}else if(comprobarTerreno(casilla,filaAct,columnaAct)==2) {
+				
+			}
+		}
+		return tirada;
 		
 			
-			atacar=true;
-		}else {
-			atacar=false;
-		}
-		
-		return atacar;
 	}
 	
 	
