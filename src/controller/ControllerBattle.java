@@ -133,6 +133,51 @@ public class ControllerBattle {
 	}
 	
 	
+
+	
+	public Terrain [][] moverTropas2(int filaAct, int columnaAct, Terrain casilla[][], int ladoMov) {
+		int uno=1, dos=2;
+		
+		for (int i = 0; i<casilla.length; i++) {
+			
+			for (int j = 0; j <casilla[i].length; j++) {
+				
+				switch(ladoMov) {
+				
+				case 1:	//Dcha
+					if(casilla[filaAct-uno][columnaAct-uno]!=casilla[0][3] || casilla[filaAct-uno][columnaAct-uno]!=casilla[1][3] || casilla[filaAct-uno][columnaAct-uno]!=casilla[2][3]) {
+						casilla[filaAct][columnaAct]=casilla[filaAct-uno][columnaAct];
+					}
+					break;
+				
+				case 2:	//Debajo
+					if(casilla[filaAct-uno][columnaAct-uno]!=casilla[2][0] || casilla[filaAct-uno][columnaAct-uno]!=casilla[2][1] || casilla[filaAct-uno][columnaAct-uno]!=casilla[2][2] || casilla[filaAct-uno][columnaAct-uno]!=casilla[2][3]) {
+						casilla[filaAct][columnaAct]=casilla[filaAct][columnaAct-uno];
+					}
+					break;
+					
+				case 3:	//Izq
+					if(casilla[filaAct-uno][columnaAct-uno]!=casilla[0][0] || casilla[filaAct-uno][columnaAct-uno]!=casilla[1][0] || casilla[filaAct-uno][columnaAct-uno]!=casilla[2][0]) {
+						casilla[filaAct][columnaAct]=casilla[filaAct-uno][columnaAct-dos];
+					}
+					break;
+					
+				case 4:	//Arriba
+					if(casilla[filaAct-uno][columnaAct-uno]!=casilla[0][0] || casilla[filaAct-uno][columnaAct-uno]!=casilla[0][1] || casilla[filaAct-uno][columnaAct-uno]!=casilla[0][2] || casilla[filaAct-uno][columnaAct-uno]!=casilla[0][3]) {
+						casilla[filaAct][columnaAct]=casilla[filaAct-dos][columnaAct-uno];
+					}
+					break;
+					
+				default:
+					break;
+				}
+				
+				
+			}
+		}
+		return casilla;
+		
+	}
 	
 	
 
