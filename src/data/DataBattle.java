@@ -8,7 +8,7 @@ public class DataBattle {
 	
 	Troop t = new Troop("Inf");
 	
-	private Terrain casilla[][] = {{new Terrain("M",0,t,"R"), new Terrain("L",0,t,"R"), new Terrain("M",0,t,"A"), new Terrain("L",0,t,"A")}, {new Terrain("A",0,t,"R"), new Terrain("M",0,t,"R"), new Terrain("L",0,t,"A"), new Terrain("A",0,t,"A")}, {new Terrain("M",0,t,"R"), new Terrain("L",0,t,"R"), new Terrain("M",0,t,"A"), new Terrain("L",0,t,"A")}};
+	private Terrain casilla[][] = {{new Terrain("M",1,new Troop("Inf"),"R"), new Terrain("L",1,new Troop("Inf"),"R"), new Terrain("M",1,new Troop("Inf"),"R"), new Terrain("L",1,new Troop("Inf"),"B"), new Terrain("M",1,new Troop("Inf"),"B")}, {new Terrain("L",1,new Troop("Inf"),"R"), new Terrain("M",1,new Troop("Inf"),"R"), new Terrain("L",1,new Troop("Inf"),"R"), new Terrain("M",1,new Troop("Inf"),"B"), new Terrain("L",1,new Troop("Inf"),"B")}, {new Terrain("M",1,new Troop("Inf"),"R"), new Terrain("L",1,new Troop("Inf"),"R"), new Terrain("A",1,new Troop("Inf"),"N"), new Terrain("L",1,new Troop("Inf"),"B"), new Terrain("M",1,new Troop("Inf"),"B")}, {new Terrain("L",1,new Troop("Inf"),"R"), new Terrain("M",1,new Troop("Inf"),"R"), new Terrain("L",1,new Troop("Inf"),"B"), new Terrain("M",1,new Troop("Inf"),"B"), new Terrain("L",1,new Troop("Inf"),"B")}, {new Terrain("M",1,new Troop("Inf"),"R"), new Terrain("L",1,new Troop("Inf"),"R"), new Terrain("M",1,new Troop("Inf"),"B"), new Terrain("L",1,new Troop("Inf"),"B"), new Terrain("M",1,new Troop("Inf"),"B")}};
 	
 	//Getters y setters
 	

@@ -4,7 +4,7 @@ import model.Player;
 
 public class DataPlayer {
 	
-	private static Player arrayJugadores[] = {new Player ("R", 18), new Player ("A", 18)};
+	private static Player arrayJugadores[] = {new Player ("R", 25), new Player ("B", 25)};
 	
 	public DataPlayer() {
 		
