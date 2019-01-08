@@ -1,13 +1,14 @@
 package crud;
 
 
+
 import model.Terrain;
-import model.Troop;
+
 
 public class CrudTerrain {
 	
 	Terrain t;
-	Troop tp;
+	
 	
 	public Terrain crearTerrenoMont() {
 		
@@ -34,4 +35,13 @@ public class CrudTerrain {
 		return t;
 	}
 
+
 }
+
+
+
+
+
+
+
+

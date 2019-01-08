@@ -1,24 +1,22 @@
 package model;
 
 public class Troop {
-	
+
+	//Atributos
 	private String tipo;
-	private int cantidad;
 	
+	//Constructores
 	
 	public Troop() {
-		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
-
-	public Troop(String tipo, int cantidad) {
-		super();
+	public Troop(String tipo) {
 		this.tipo = tipo;
-		this.cantidad = cantidad;
+
 	}
 
-
+	//Getters y setters
 	public String getTipo() {
 		return tipo;
 	}
@@ -28,20 +26,10 @@ public class Troop {
 		this.tipo = tipo;
 	}
 
-
-	public int getCantidad() {
-		return cantidad;
-	}
-
-
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
-	}
-
-
+	//toString
 	@Override
 	public String toString() {
-		return "Troop [tipo=" + tipo + ", cantidad=" + cantidad + "]";
+		return "Troop [tipo=" + tipo + "]";
 	}
 	
 	

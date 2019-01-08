@@ -2,17 +2,18 @@ package model;
 
 public class Player {
 	
-	//Atributos
+	//Atributos, canT significa cantidad Tropas
 	private String equipo;
-	
+	private int canT;
 	
 	//Constructores
 	public Player() {
 		
 	}
 	
-	public Player(String equipo) {
+	public Player(String equipo, int canT) {
 		this.equipo = equipo;
+		this.canT = canT;
 	}
 
 	//Getters y setters
@@ -24,7 +25,14 @@ public class Player {
 		this.equipo = equipo;
 	}
 
-	
+	public int getCanT() {
+		return canT;
+	}
+
+	public void setCanT(int canT) {
+		this.canT = canT;
+	}
+
 	//toString
 	@Override
 	public String toString() {
