@@ -50,14 +50,24 @@ public class ControllerBattle {
 					tirada=tirarDadox1()*cero;
 				}
 				
-			}else if(comprobarTerreno(casilla,filaAct,columnaAct)==2) {
-				
-			}
+			}else if(comprobarTerreno(casilla,filaAct,columnaAct)==2 && casilla[filaAct][columnaAct].getCanT() > casilla[filaAtaque-1][columnaAtaque-1].getCanT()) {
+				tirada=tirarDadox3();
+			
+					
+				}else if(comprobarTerreno(casilla,filaAct,columnaAct)==2) {
+					
+					tirada=tirarDadox2();
+					
+				}else {
+					tirada=tirarDadox1();
+				}
 		}
 		return tirada;
 		
 			
 	}
+	
+	
 	
 	
 	
