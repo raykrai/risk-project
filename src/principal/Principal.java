@@ -13,7 +13,7 @@ import view.Menu;
 public class Principal {
 
 	public static void main(String[] args) {
-		int turno = 2, opt, cero = 0, optC, filaAct=0, columnaAct=0, filaAtaque=0, columnaAtaque=0, ladoMov=0, cantidad;
+		int turno = 2, opt, cero = 0, optC, filaAct=0, columnaAct=0, filaAtaque=0, columnaAtaque=0, ladoMov=0, cantidad, uno=1;
 		String turnoActivo = "R";
 		String tipo;
 		
@@ -136,6 +136,13 @@ public class Principal {
 									
 									m.imprimirOpcionesMovimiento();
 									ladoMov=Leer.datoInt();
+									
+									if(cantidad>uno) {
+										cB.moverTropas(filaAct, columnaAct, b.getCasilla(), ladoMov, cantidad);
+									}else {
+											System.out.println("Necesitas más tropas para poder moverte");
+										}
+									map.imprimirMapa(b);
 									
 									
 									//TODO meter bucle para mover 

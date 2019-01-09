@@ -2,6 +2,7 @@ package controller;
 
 import java.util.Random;
 
+import data.DataPlayer;
 import model.Terrain;
 import model.Troop;
 
@@ -68,49 +69,7 @@ public class ControllerBattle {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	public Terrain moverTropas(int filaAct, int columnaAct, Terrain casilla[][], int ladoMov) {
-		Terrain posicionAct=casilla[filaAct][columnaAct];
-		int uno=1, dos=2;
-		
-		for (int i = 0; i<casilla.length; i++) {
-			
-			for (int j = 0; j <casilla[i].length; j++) {
-				
-				switch(ladoMov) {
-				
-				case 1:	//Dcha
-					posicionAct = casilla[filaAct-uno][columnaAct];	
-					break;
-				
-				case 2:	//Debajo
-					posicionAct = casilla[filaAct][columnaAct-uno];
-					break;
-					
-				case 3:	//Izq
-					posicionAct = casilla[filaAct-uno][columnaAct-dos];
-					break;
-					
-				case 4:	//Arriba
-					posicionAct = casilla[filaAct-dos][columnaAct-uno];
-					break;
-					
-				default:
-					break;
-				}
-				
-				
-			}
-		}
-		return posicionAct;
-		
-	}
-	
+
 	
 	public boolean comprobarDistancia(int filaAct, int columnaAct, Terrain casilla[][], int filaAtaque, int columnaAtaque) {
 		
@@ -140,6 +99,9 @@ public class ControllerBattle {
 			isNear = true;
 		}
 		*/
+		
+		
+		
 		return isNear;
 	}
 	
@@ -151,7 +113,7 @@ public class ControllerBattle {
 			
 			for (int j = 0; j <casilla[i].length; j++) {
 		
-		if(casilla[filaAct-uno][columnaAct-uno].getT().getTipo().equals("Inf") && casilla[filaAct-uno][columnaAct-uno].getTipo().equals("Montaña") || (casilla[filaAct-uno][columnaAct-uno].getT().getTipo().equals("Cab") && casilla[filaAct-uno][columnaAct-uno].getTipo().equals("Llanura"))) {
+		if(casilla[filaAct-uno][columnaAct-uno].getT().getTipo().equals("Inf") && casilla[filaAct-uno][columnaAct-uno].getTipo().equals("M") || (casilla[filaAct-uno][columnaAct-uno].getT().getTipo().equals("Cab") && casilla[filaAct-uno][columnaAct-uno].getTipo().equals("L"))) {
 			vent=2;
 		}
 		
@@ -163,52 +125,114 @@ public class ControllerBattle {
 	}
 	
 	
-
 	
-	public Terrain [][] moverTropas2(int filaAct, int columnaAct, Terrain casilla[][], int ladoMov) {
-		int uno=1, dos=2;
+	public Terrain [][] moverTropas(int filaAct, int columnaAct, Terrain casilla[][], int ladoMov, int cantidad) {
+		int uno=1, dos=2, tres=3, cuatro=4, cero=0;
 		
 		for (int i = 0; i<casilla.length; i++) {
 			
 			for (int j = 0; j <casilla[i].length; j++) {
 				
+				
+				filaAct -= uno;
+				columnaAct -= uno;
+				cantidad--;
+	
 				switch(ladoMov) {
-				
+					
 				case 1:	//Dcha
-					if(casilla[filaAct-uno][columnaAct-uno]!=casilla[0][3] || casilla[filaAct-uno][columnaAct-uno]!=casilla[1][3] || casilla[filaAct-uno][columnaAct-uno]!=casilla[2][3]) {
+					if(casilla[filaAct][columnaAct]!=casilla[cero][cuatro] && casilla[filaAct][columnaAct]!=casilla[uno][cuatro] && casilla[filaAct][columnaAct]!=casilla[dos][cuatro] && casilla[filaAct][columnaAct]!=casilla[tres][cuatro] && casilla[filaAct][columnaAct]!=casilla[cuatro][cuatro]) {
 						casilla[filaAct][columnaAct]=casilla[filaAct-uno][columnaAct];
+					}else {
+						cantidad++;
 					}
 					break;
-				
+					
 				case 2:	//Debajo
-					if(casilla[filaAct-uno][columnaAct-uno]!=casilla[2][0] || casilla[filaAct-uno][columnaAct-uno]!=casilla[2][1] || casilla[filaAct-uno][columnaAct-uno]!=casilla[2][2] || casilla[filaAct-uno][columnaAct-uno]!=casilla[2][3]) {
+					if(casilla[filaAct][columnaAct]!=casilla[cuatro][cero] && casilla[filaAct][columnaAct]!=casilla[cuatro][uno] && casilla[filaAct][columnaAct]!=casilla[cuatro][dos] && casilla[filaAct][columnaAct]!=casilla[cuatro][tres] && casilla[filaAct][columnaAct]!=casilla[cuatro][cuatro]) {
 						casilla[filaAct][columnaAct]=casilla[filaAct][columnaAct-uno];
+					}else {
+						cantidad++;
 					}
 					break;
-					
+						
 				case 3:	//Izq
-					if(casilla[filaAct-uno][columnaAct-uno]!=casilla[0][0] || casilla[filaAct-uno][columnaAct-uno]!=casilla[1][0] || casilla[filaAct-uno][columnaAct-uno]!=casilla[2][0]) {
+					if(casilla[filaAct][columnaAct]!=casilla[cero][cero] && casilla[filaAct][columnaAct]!=casilla[uno][cero] && casilla[filaAct][columnaAct]!=casilla[dos][cero]&& casilla[filaAct][columnaAct]!=casilla[tres][cero] &&casilla[filaAct][columnaAct]!=casilla[cuatro][cero]) {
 						casilla[filaAct][columnaAct]=casilla[filaAct-uno][columnaAct-dos];
+					}else {
+						cantidad++;
 					}
 					break;
-					
+						
 				case 4:	//Arriba
-					if(casilla[filaAct-uno][columnaAct-uno]!=casilla[0][0] || casilla[filaAct-uno][columnaAct-uno]!=casilla[0][1] || casilla[filaAct-uno][columnaAct-uno]!=casilla[0][2] || casilla[filaAct-uno][columnaAct-uno]!=casilla[0][3]) {
+					if(casilla[filaAct][columnaAct]!=casilla[cero][cero] && casilla[filaAct][columnaAct]!=casilla[cero][uno] && casilla[filaAct][columnaAct]!=casilla[cero][dos] && casilla[filaAct][columnaAct]!=casilla[cero][3] && casilla[filaAct][columnaAct]!=casilla[cero][cuatro]) {
 						casilla[filaAct][columnaAct]=casilla[filaAct-dos][columnaAct-uno];
+					}else {
+						cantidad++;
 					}
 					break;
-					
-				default:
-					break;
+						
 				}
+					
 				
-				
+			
 			}
 		}
 		return casilla;
 		
 	}
 	
+	
+	public Terrain [][] moverTropas2(int filaAct, int columnaAct, Terrain casilla[][], int ladoMov, int cantidad) {
+		int uno=1, dos=2, tres=3, cuatro=4, cinco=5;
+		
+		
+		for (int i = 0; i<casilla.length; i++) {
+			
+			for (int j = 0; j <casilla[i].length; j++) {
+				
+					
+					switch(ladoMov) {
+					
+					case 1:	//Dcha
+						if((filaAct!=uno&&columnaAct!=cinco) && (filaAct!=dos&&columnaAct!=cinco) && (filaAct!=tres&&columnaAct!=cinco) && (filaAct!=cuatro&&columnaAct!=cinco) && (filaAct!=cinco&&columnaAct!=cinco)) {
+							columnaAct++;
+							cantidad-=uno;
+						}
+						break;
+					
+					case 2:	//Abajo
+						if((filaAct!=cinco&&columnaAct!=uno) && (filaAct!=cinco&&columnaAct!=dos) && (filaAct!=cinco&&columnaAct!=tres) && (filaAct!=cinco&&columnaAct!=cuatro) && (filaAct!=cinco&&columnaAct!=cinco)) {
+							filaAct--;
+							cantidad-=uno;
+						}
+						break;
+						
+					case 3:	//Izq
+						if((filaAct!=uno&&columnaAct!=uno) && (filaAct!=dos&&columnaAct!=uno) && (filaAct!=tres&&columnaAct!=uno) && (filaAct!=cuatro&&columnaAct!=uno) && (filaAct!=cinco&&columnaAct!=uno)) {
+							columnaAct--;
+							cantidad-=uno;
+						}
+						break;
+						
+					case 4:	//Arriba
+						if((filaAct!=uno&&columnaAct!=uno) && (filaAct!=uno&&columnaAct!=dos) && (filaAct!=uno&&columnaAct!=tres) && (filaAct!=uno&&columnaAct!=cuatro) && (filaAct!=uno&&columnaAct!=cinco)) {
+							filaAct--;
+							cantidad-=uno;
+						}
+						break;
+					
+					}
+	
+					
+				}
+				
+				
+			}
+		
+		return casilla;
+		
+	}
 	
 
 }
