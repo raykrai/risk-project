@@ -1,6 +1,7 @@
 package principal;
 
 import controller.ControllerPartida;
+import controller.ControllerBattle;
 import data.DataBattle;
 import data.DataPlayer;
 import model.Battle;
@@ -12,11 +13,12 @@ import view.Menu;
 public class Principal {
 
 	public static void main(String[] args) {
-		int turno = 2, opt, cero = 0, optC, filaAct=0, columnaAct=0, ladoMov=0, cantidad;
+		int turno = 2, opt, cero = 0, optC, filaAct=0, columnaAct=0, filaAtaque=0, columnaAtaque=0, ladoMov=0, cantidad;
 		String turnoActivo = "R";
 		String tipo;
 		
 		DataBattle dB = new DataBattle();
+		ControllerBattle cB = new ControllerBattle();
 		Battle b = new Battle(dB.getCasilla());
 		Mapa map = new Mapa();
 		Menu m = new Menu();
@@ -144,7 +146,6 @@ public class Principal {
 								
 								case 2:
 								
-									
 									break;
 								
 								case 3:
@@ -174,7 +175,7 @@ public class Principal {
 					} while (!cP.comprobarGanador(b.getCasilla()));
 					break;
 				case 2:
-					
+					m.imprimirMenuReglas();
 					
 					
 					break;

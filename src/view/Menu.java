@@ -51,6 +51,14 @@ public class Menu {
 	}
 	
 	public void imprimirMenuReglas() {
+		
+		System.out.println("\t______  _____  _____  _       ___   _____ \r\n" + 
+				"\t| ___ \\|  ___||  __ \\| |     / _ \\ /  ___|\r\n" + 
+				"\t| |_/ /| |__  | |  \\/| |    / /_\\ \\\\ `--. \r\n" + 
+				"\t|    / |  __| | | __ | |    |  _  | `--. \\\r\n" + 
+				"\t| |\\ \\ | |___ | |_\\ \\| |____| | | |/\\__/ /\r\n" + 
+				"\t\\_| \\_|\\____/  \\____/\\_____/\\_| |_/\\____/ \r\n" + 
+				"                                          ");
 
 		System.out.println("Gana la partida el que consigue destruir todas las tropas del enemigo");
 		System.out.println("Si pasados 10 turnos no ha ganado nadie, ganará el que más tropa tenga");
