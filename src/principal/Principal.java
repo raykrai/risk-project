@@ -18,11 +18,11 @@ public class Principal {
 		String tipo;
 		
 		DataBattle dB = new DataBattle();
-		ControllerBattle cB = new ControllerBattle();
 		Battle b = new Battle(dB.getCasilla());
 		Mapa map = new Mapa();
 		Menu m = new Menu();
 		
+		ControllerBattle cB = new ControllerBattle();
 		ControllerPartida cP = new ControllerPartida();
 		
 		//Se muestra el menú
@@ -81,7 +81,6 @@ public class Principal {
 					
 					System.out.println("Ahora el jugador Blue (B)");
 					
-					
 					do {
 						
 						map.imprimirMapa(b);
@@ -115,9 +114,7 @@ public class Principal {
 						}
 						
 					} while (DataPlayer.getArrayJugadores()[1].getCanT() != 0);
-					
-					//TODO método para elegir las posiciones iniciales del segundo jugador, blue
-					
+
 					do {
 						
 						do {
@@ -131,7 +128,7 @@ public class Principal {
 							switch (optC) {
 								
 								case 1:	//Mover tropas
-									System.out.println("Indique la topa que desea movilizar:");
+									System.out.println("Indique la tropa que desea movilizar:");
 									System.out.println("Fila");
 									filaAct=Leer.datoInt();
 									System.out.println("Columna");
@@ -145,7 +142,34 @@ public class Principal {
 									break;
 								
 								case 2:
-								
+									
+									do {
+										
+										System.out.println("Indique la tropa con la que desea atacar");
+										
+										System.out.println("Fila");
+										filaAct = Leer.datoInt();
+										
+										System.out.println("Columna");
+										columnaAct = Leer.datoInt();
+										
+										System.out.println("Indique el terreno o casilla a atacar");
+										
+										System.out.println("Fila");
+										filaAtaque = Leer.datoInt();
+										
+										System.out.println("Columna");
+										columnaAct = Leer.datoInt();
+										
+										//TODO Finalizar comprobar distancia e incorporar método para comparar tirada de dados
+										
+										if (cB.comprobarDistancia(filaAct, columnaAct, dB.getCasilla(), filaAtaque, columnaAtaque) == true) {
+											System.out.println("Las tropas están al lado");
+										} else {
+											System.out.println("Las tropas están demasiado lejos");
+										}
+									} while (cB.comprobarDistancia(filaAct, columnaAct, dB.getCasilla(), filaAtaque, columnaAtaque) != true);
+									
 									break;
 								
 								case 3:
@@ -175,8 +199,39 @@ public class Principal {
 					} while (!cP.comprobarGanador(b.getCasilla()));
 					break;
 				case 2:
+					
 					m.imprimirMenuReglas();
 					
+					/*TODO Testeando comprobar distancia, NO BORRAR POR FAVOR
+					
+					map.imprimirMapa(b);
+					
+					do {
+						
+						System.out.println("Indique la tropa con la que desea atacar");
+						
+						System.out.println("Fila");
+						filaAct = Leer.datoInt();
+						
+						System.out.println("Columna");
+						columnaAct = Leer.datoInt();
+						
+						System.out.println("Indique el terreno o casilla a atacar");
+						
+						System.out.println("Fila");
+						filaAtaque = Leer.datoInt();
+						
+						System.out.println("Columna");
+						columnaAtaque = Leer.datoInt();
+						
+						if (cB.comprobarDistancia(filaAct, columnaAct, dB.getCasilla(), filaAtaque, columnaAtaque) == true) {
+							System.out.println("Las tropas están al lado");
+						} else {
+							System.out.println("Las tropas están demasiado lejos");
+						}
+					} while (cB.comprobarDistancia(filaAct, columnaAct, dB.getCasilla(), filaAtaque, columnaAtaque) != true);
+					
+					*/
 					
 					break;
 					

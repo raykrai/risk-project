@@ -113,14 +113,34 @@ public class ControllerBattle {
 	
 	
 	public boolean comprobarDistancia(int filaAct, int columnaAct, Terrain casilla[][], int filaAtaque, int columnaAtaque) {
-		boolean distancia=false;
+		
+		boolean isNear=false;
+
 		int uno=1, dos=2;
 		
-		if(casilla[filaAct-uno][columnaAct]==casilla[filaAtaque][columnaAtaque] || casilla[filaAct][columnaAct-uno]==casilla[filaAtaque][columnaAtaque] || casilla[filaAct-uno][columnaAct-dos]==casilla[filaAtaque][columnaAtaque] || casilla[filaAct-dos][columnaAct-uno]==casilla[filaAtaque][columnaAtaque]) {
-			distancia=true;
+/*		if(casilla[filaAct-uno][columnaAct]==casilla[filaAtaque][columnaAtaque] || casilla[filaAct][columnaAct-uno]==casilla[filaAtaque][columnaAtaque] || casilla[filaAct-uno][columnaAct-dos]==casilla[filaAtaque][columnaAtaque] || casilla[filaAct-dos][columnaAct-uno]==casilla[filaAtaque][columnaAtaque]) {
+			isNear=true;
+		}
+*/		
+		
+		/*En la primera forma de hacerlo lo más recomendable sería poner las 4 líneas de abajo para controlar posibles errores de posiciones en el array
+
+		filaAct -= 1;
+		columnaAct -= 1;
+		filaAtaque -= 1;
+		columnaAtaque -= 1;
+		
+		if (casilla[filaAct][columnaAct+uno]==casilla[filaAtaque][columnaAtaque] || casilla[filaAct][columnaAct-uno]==casilla[filaAtaque][columnaAtaque] || casilla[filaAct+uno][columnaAct] == casilla[filaAtaque][columnaAtaque] || casilla[filaAct-uno][columnaAct] == casilla[filaAtaque][columnaAtaque]) {
+			isNear = true;
 		}
 		
-		return distancia;
+		Segunda forma de hacerlo, en esta no hay que controlar posibles errores de posiciones en el array.
+		
+		if ( (filaAct == filaAtaque && columnaAct+uno == columnaAtaque) || (filaAct == filaAtaque && columnaAct-uno == columnaAtaque) || (filaAct+uno == filaAtaque && columnaAct == columnaAtaque) || (filaAct-uno == filaAtaque && columnaAct == columnaAtaque)) {
+			isNear = true;
+		}
+		*/
+		return isNear;
 	}
 	
 	
