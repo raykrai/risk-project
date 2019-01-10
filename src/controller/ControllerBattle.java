@@ -64,6 +64,52 @@ public class ControllerBattle {
 			
 	
 	
+	public int defensor(int filaAct, int columnaAct, Terrain casilla[][], int filaAtaque, int columnaAtaque) {
+		
+		int tiradaD=0, cien=100, cero=0;
+		
+		if(casilla[filaAtaque-1][columnaAtaque-1].getTipo().equals("Artilleria")) {
+			
+			if(casilla[filaAct-1][columnaAct-1].getT().getTipo().equals("Infanteria")) {
+				tiradaD=tirarDadox1()*cien;
+			}else {
+				tiradaD=tirarDadox1()*cero;
+			}
+		}else if(comprobarTerreno(casilla,filaAtaque,columnaAtaque)==2 && casilla[filaAtaque][columnaAtaque].getCanT() > casilla[filaAtaque-1][columnaAct-1].getCanT()) {
+				tiradaD=tirarDadox3();
+					
+		}else if(comprobarTerreno(casilla,filaAtaque,columnaAtaque)==2) {
+			
+			tiradaD=tirarDadox2();
+			
+		}else{
+			tiradaD=tirarDadox1();
+		}
+	
+		
+		return tiradaD;
+	}
+	
+	
+	
+	
+	public boolean comprobarBatalla(int filaAct, int columnaAct, Terrain casilla[][], int filaAtaque, int columnaAtaque) {
+		
+		boolean atacanteGanador;
+		
+		if(atacarTropas(filaAct, columnaAct, casilla, filaAtaque, columnaAtaque)>=defensor(filaAct, columnaAct, casilla, filaAtaque, columnaAtaque)  ) {
+			atacanteGanador=true;
+		}else {
+			atacanteGanador=false;
+		}
+		
+		
+		
+		return atacanteGanador;
+		
+	}
+	
+	
 
 	
 	public boolean comprobarDistancia(int filaAct, int columnaAct, int filaAtaque, int columnaAtaque) {
