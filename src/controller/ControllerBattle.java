@@ -234,57 +234,5 @@ public class ControllerBattle {
 		return hasMoved;
 	}
 	
-	
-	public Terrain [][] moverTropas2(int filaAct, int columnaAct, Terrain casilla[][], int ladoMov, int cantidad) {
-		int uno=1, dos=2, tres=3, cuatro=4, cinco=5;
-		
-		
-		for (int i = 0; i<casilla.length; i++) {
-			
-			for (int j = 0; j <casilla[i].length; j++) {
-				
-					
-					switch(ladoMov) {
-					
-					case 1:	//Dcha
-						if((filaAct!=uno&&columnaAct!=cinco) && (filaAct!=dos&&columnaAct!=cinco) && (filaAct!=tres&&columnaAct!=cinco) && (filaAct!=cuatro&&columnaAct!=cinco) && (filaAct!=cinco&&columnaAct!=cinco)) {
-							columnaAct++;
-							cantidad-=uno;
-						}
-						break;
-					
-					case 2:	//Abajo
-						if((filaAct!=cinco&&columnaAct!=uno) && (filaAct!=cinco&&columnaAct!=dos) && (filaAct!=cinco&&columnaAct!=tres) && (filaAct!=cinco&&columnaAct!=cuatro) && (filaAct!=cinco&&columnaAct!=cinco)) {
-							filaAct--;
-							cantidad-=uno;
-						}
-						break;
-						
-					case 3:	//Izq
-						if((filaAct!=uno&&columnaAct!=uno) && (filaAct!=dos&&columnaAct!=uno) && (filaAct!=tres&&columnaAct!=uno) && (filaAct!=cuatro&&columnaAct!=uno) && (filaAct!=cinco&&columnaAct!=uno)) {
-							columnaAct--;
-							cantidad-=uno;
-						}
-						break;
-						
-					case 4:	//Arriba
-						if((filaAct!=uno&&columnaAct!=uno) && (filaAct!=uno&&columnaAct!=dos) && (filaAct!=uno&&columnaAct!=tres) && (filaAct!=uno&&columnaAct!=cuatro) && (filaAct!=uno&&columnaAct!=cinco)) {
-							filaAct--;
-							cantidad-=uno;
-						}
-						break;
-					
-					}
-	
-					
-				}
-				
-				
-			}
-		
-		return casilla;
-		
-	}
-	
 
 }

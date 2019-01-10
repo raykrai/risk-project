@@ -135,13 +135,15 @@ public class Principal {
 									columnaAct=Leer.datoInt();
 									
 									System.out.println("Indica la cantidad deseada a mover");
+									cantidad=Leer.datoInt();
 									
-									m.imprimirOpcionesMovimiento();
+									m.imprimirMenuMovimiento(filaAct, columnaAct);
 									ladoMov=Leer.datoInt();
 									
 									if(cantidad>uno) {
 										
 										/*TODO METER CONDICIONALES PARA CONTROLAR EL MENÚ DE MOVIMIENTO - LUCAS
+										 * A
 										 * 
 										m.imprimirOpcionesMovimiento();
 										ladoMov=Leer.datoInt();

@@ -99,12 +99,6 @@ public class Menu {
 				"\t      | | | | | (_| | | (_| | | | |  __/  _    | (_| | | (_| | | | | | | (_| |   |  __/ | |   | (_| | | |_| | |  __/   | | | | | | | (_| | \\__ \\   | |_  | |    | (_) | | |_) | | (_| |   | |_  |  __/ | | | | | (_| | | (_| |\r\n" + 
 				"\t      |_| |_|  \\__,_|  \\__,_| |_|  \\___| ( )    \\__, |  \\__,_| |_| |_|  \\__,_|    \\___| |_|    \\__, |  \\__,_|  \\___|   |_| |_| |_|  \\__,_| |___/    \\__| |_|     \\___/  | .__/   \\__,_|    \\__|  \\___| |_| |_|  \\__, |  \\__,_|\r\n" + 
 				"\t                                         |/     |___/                                             |_|                                                                   |_|                                     |___/         ");
-		/*System.out.println(" _____ \r\n" + 
-				"|____ |\r\n" + 
-				"    / /\r\n" + 
-				"    \\ \\\r\n" + 
-				".___/ /\r\n" + 
-				"\\____/ \t3-Solo se pueden agrupar tropas del mismo tipo");*/
 		
 		System.out.println("  _____           ____            _                                                       _                                                                            _                                        \r\n" + 
 				" |___ /          / ___|    ___   | |   ___      ___    ___     _ __    _   _    ___    __| |   ___   _ __       __ _    __ _   _ __   _   _   _ __     __ _   _ __    | |_   _ __    ___    _ __     __ _   ___ \r\n" + 
@@ -134,11 +128,44 @@ public class Menu {
 		System.out.println("3. Pasar turno");
 	}
 	
-	public void imprimirOpcionesMovimiento() {
+	public void imprimirMenuMovimiento(int filaAct, int columnaAct) {
+		int uno=1, dos=2, tres=3, cuatro=4, cinco=5;
+		
 		System.out.println("¿Hacia dónde quiere mover las tropas?");
-		System.out.println("1. Derecha");
-		System.out.println("2. Debajo");
-		System.out.println("3. Izquierda");
-		System.out.println("4. Arriba");
+		if(filaAct==uno && columnaAct==uno) {	//Esquina SUP izq
+			System.out.println("1. Derecha");
+			System.out.println("2. Debajo");
+		}else if(filaAct==uno && columnaAct==cinco){	//Esquina SUP dcha
+			System.out.println("1. Debajo");
+			System.out.println("2. Izquierda");
+		}else if(filaAct==cinco && columnaAct==uno){	//Esquina INF izq
+			System.out.println("1. Debajo");
+			System.out.println("2. Izquierda");
+		}else if(filaAct==cinco && columnaAct==cinco){	//Esquina INF dcha
+			System.out.println("1. Debajo");
+			System.out.println("2. Izquierda");
+		}else if(filaAct==uno && (columnaAct==dos || columnaAct==tres || columnaAct==cuatro)){	//Borde superior (menos 1,1 y 1,5)
+			System.out.println("1. Derecha");
+			System.out.println("2. Debajo");
+			System.out.println("3. Izquierda");
+		}else if(columnaAct==cinco && (filaAct==dos || filaAct==tres || filaAct==cuatro)){	//Borde lateral dcha (menos 1,5 y 5,5)
+			System.out.println("1. Debajo");
+			System.out.println("2. Izquierda");
+			System.out.println("3. Arriba");
+		}else if(filaAct==cinco && (columnaAct==dos || columnaAct==tres || columnaAct==cuatro)){	//Borde inferior (menos 5,1 y 5,5)
+			System.out.println("1. Derecha");
+			System.out.println("2. Debajo");
+			System.out.println("3. Izquierda");
+		}else if(columnaAct==uno && (filaAct==dos || filaAct==tres || filaAct==cuatro)){	//Borde lateral izq (menos 1,1 y 5,1)
+			System.out.println("1. Derecha");
+			System.out.println("2. Debajo");
+			System.out.println("3. Arriba");
+		}else {	//Si estás en el medio
+			System.out.println("1. Derecha");
+			System.out.println("2. Debajo");
+			System.out.println("3. Izquierda");
+			System.out.println("4. Arriba");
+		}
+		
 	}
 }
