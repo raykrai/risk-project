@@ -38,10 +38,6 @@ public class ControllerBattle {
 		int cero=0;
 		int tirada=0;
 		
-		
-		
-		
-		if(comprobarDistancia(filaAct,columnaAct,casilla,filaAtaque,columnaAtaque)==true)  {
 			
 			if(casilla[filaAct-1][columnaAct-1].getTipo().equals("Artilleria")){
 				
@@ -51,7 +47,7 @@ public class ControllerBattle {
 					tirada=tirarDadox1()*cero;
 				}
 				
-			}else if(comprobarTerreno(casilla,filaAct,columnaAct)==2 && casilla[filaAct][columnaAct].getCanT() > casilla[filaAtaque-1][columnaAtaque-1].getCanT()) {
+				}else if(comprobarTerreno(casilla,filaAct,columnaAct)==2 && casilla[filaAct][columnaAct].getCanT() > casilla[filaAtaque-1][columnaAtaque-1].getCanT()) {
 				tirada=tirarDadox3();
 			
 					
@@ -62,11 +58,10 @@ public class ControllerBattle {
 				}else {
 					tirada=tirarDadox1();
 				}
-		}
-		return tirada;
-		
 			
-	}
+			return tirada;
+			}
+			
 	
 	
 	public boolean comprobarBatalla(int filaAct, int columnaAct, Terrain casilla[][], int filaAtaque, int columnaAtaque) {
@@ -82,37 +77,16 @@ public class ControllerBattle {
 	
 
 	
-	public boolean comprobarDistancia(int filaAct, int columnaAct, Terrain casilla[][], int filaAtaque, int columnaAtaque) {
+	public boolean comprobarDistancia(int filaAct, int columnaAct, int filaAtaque, int columnaAtaque) {
 		
 		boolean isNear=false;
 
-		int uno=1, dos=2;
-		
-/*		if(casilla[filaAct-uno][columnaAct]==casilla[filaAtaque][columnaAtaque] || casilla[filaAct][columnaAct-uno]==casilla[filaAtaque][columnaAtaque] || casilla[filaAct-uno][columnaAct-dos]==casilla[filaAtaque][columnaAtaque] || casilla[filaAct-dos][columnaAct-uno]==casilla[filaAtaque][columnaAtaque]) {
-			isNear=true;
-		}
-*/		
-		
-		/*En la primera forma de hacerlo lo más recomendable sería poner las 4 líneas de abajo para controlar posibles errores de posiciones en el array
-
-		filaAct -= 1;
-		columnaAct -= 1;
-		filaAtaque -= 1;
-		columnaAtaque -= 1;
-		
-		if (casilla[filaAct][columnaAct+uno]==casilla[filaAtaque][columnaAtaque] || casilla[filaAct][columnaAct-uno]==casilla[filaAtaque][columnaAtaque] || casilla[filaAct+uno][columnaAct] == casilla[filaAtaque][columnaAtaque] || casilla[filaAct-uno][columnaAct] == casilla[filaAtaque][columnaAtaque]) {
-			isNear = true;
-		}
-		
-		Segunda forma de hacerlo, en esta no hay que controlar posibles errores de posiciones en el array.
+		int uno=1;
 		
 		if ( (filaAct == filaAtaque && columnaAct+uno == columnaAtaque) || (filaAct == filaAtaque && columnaAct-uno == columnaAtaque) || (filaAct+uno == filaAtaque && columnaAct == columnaAtaque) || (filaAct-uno == filaAtaque && columnaAct == columnaAtaque)) {
 			isNear = true;
 		}
-		*/
-		
-		
-		
+	
 		return isNear;
 	}
 	
@@ -137,112 +111,138 @@ public class ControllerBattle {
 	
 	
 	
-	public Terrain [][] moverTropas(int filaAct, int columnaAct, Terrain casilla[][], int ladoMov, int cantidad) {
+	public boolean moverTropas(int filaAct, int columnaAct, Terrain casilla[][], int ladoMov, int cantidad) {
 		int uno=1, dos=2, tres=3, cuatro=4, cero=0;
 		
-		for (int i = 0; i<casilla.length; i++) {
+		boolean hasMoved = false;
+		
+		filaAct -= uno;
+		columnaAct -= uno;
+		
+		//TODO AQUÍ UN IF ENORME PARA CONTROLAR FACCIÓN Y PARA CONTROLAR CANTIDAD
+		/* EL IF ENORME AQUÍ*/
+		//TODO DENTRO DEL ELSE TERMINAR DE CONTROLAR ESQUINAS Y LATERALES Y LAS CASILLAS DEL CENTRO
+		if ( filaAct == 0 && columnaAct == 0 && (ladoMov == 3 || ladoMov == 4) /* Casilla 1/1 (0/0) */) {
 			
-			for (int j = 0; j <casilla[i].length; j++) {
-				
-				
-				filaAct -= uno;
-				columnaAct -= uno;
-				cantidad--;
-	
-				switch(ladoMov) {
-					
-				case 1:	//Dcha
-					if(casilla[filaAct][columnaAct]!=casilla[cero][cuatro] && casilla[filaAct][columnaAct]!=casilla[uno][cuatro] && casilla[filaAct][columnaAct]!=casilla[dos][cuatro] && casilla[filaAct][columnaAct]!=casilla[tres][cuatro] && casilla[filaAct][columnaAct]!=casilla[cuatro][cuatro]) {
-						casilla[filaAct][columnaAct]=casilla[filaAct-uno][columnaAct];
-					}else {
-						cantidad++;
-					}
-					break;
-					
-				case 2:	//Debajo
-					if(casilla[filaAct][columnaAct]!=casilla[cuatro][cero] && casilla[filaAct][columnaAct]!=casilla[cuatro][uno] && casilla[filaAct][columnaAct]!=casilla[cuatro][dos] && casilla[filaAct][columnaAct]!=casilla[cuatro][tres] && casilla[filaAct][columnaAct]!=casilla[cuatro][cuatro]) {
-						casilla[filaAct][columnaAct]=casilla[filaAct][columnaAct-uno];
-					}else {
-						cantidad++;
-					}
-					break;
-						
-				case 3:	//Izq
-					if(casilla[filaAct][columnaAct]!=casilla[cero][cero] && casilla[filaAct][columnaAct]!=casilla[uno][cero] && casilla[filaAct][columnaAct]!=casilla[dos][cero]&& casilla[filaAct][columnaAct]!=casilla[tres][cero] &&casilla[filaAct][columnaAct]!=casilla[cuatro][cero]) {
-						casilla[filaAct][columnaAct]=casilla[filaAct-uno][columnaAct-dos];
-					}else {
-						cantidad++;
-					}
-					break;
-						
-				case 4:	//Arriba
-					if(casilla[filaAct][columnaAct]!=casilla[cero][cero] && casilla[filaAct][columnaAct]!=casilla[cero][uno] && casilla[filaAct][columnaAct]!=casilla[cero][dos] && casilla[filaAct][columnaAct]!=casilla[cero][3] && casilla[filaAct][columnaAct]!=casilla[cero][cuatro]) {
-						casilla[filaAct][columnaAct]=casilla[filaAct-dos][columnaAct-uno];
-					}else {
-						cantidad++;
-					}
-					break;
-						
-				}
-					
-				
+			switch (ladoMov) {
 			
+				case 1: //Dcha
+				
+					casilla[filaAct][columnaAct+uno].setCanT(casilla[filaAct][columnaAct].getCanT());
+					casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+					
+					hasMoved = true;
+					break;
+			
+				case 2: //Debajo
+					
+					casilla[filaAct+uno][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT());
+					casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+					
+					hasMoved = true;
+					break;
+					
+				default:
+					
+					System.out.println("Opción no válida");
+					
+					break;
+			}
+			
+		} else if ( filaAct == 0 /* Fila 1(0) */ ){
+			switch (ladoMov) {
+			
+			case 1: //Dcha
+				
+				casilla[filaAct][columnaAct+uno].setCanT(casilla[filaAct][columnaAct].getCanT());
+				casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+				
+				hasMoved = true;
+				break;
+			
+			case 2: //Debajo
+				
+				casilla[filaAct+uno][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT());
+				casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+				
+				hasMoved = true;
+				break;
+			
+			case 3: //Izq
+				
+				casilla[filaAct][columnaAct-uno].setCanT(casilla[filaAct][columnaAct].getCanT());
+				casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+				
+				hasMoved = true;
+				break;
+			
+				
+			}
+		} else if (filaAct == 0 && columnaAct == 4) {
+			
+			switch (ladoMov) {
+			
+				case 1: //Debajo
+					
+					casilla[filaAct+uno][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT());
+					casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+					
+					hasMoved = true;
+					break;
+				
+				case 2: //Izq
+					
+					casilla[filaAct][columnaAct-uno].setCanT(casilla[filaAct][columnaAct].getCanT());
+					casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+					
+					hasMoved = true;
+					break;
+			}
+		} else {
+			switch (ladoMov) {
+			
+				case 1: //Dcha
+					
+					casilla[filaAct][columnaAct+uno].setCanT(casilla[filaAct][columnaAct].getCanT());
+					casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+					
+					hasMoved = true;
+					break;
+				
+				case 2: //Debajo
+					
+					casilla[filaAct+uno][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT());
+					casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+					
+					hasMoved = true;
+					break;
+				
+				case 3: //Izq
+					
+					casilla[filaAct][columnaAct-uno].setCanT(casilla[filaAct][columnaAct].getCanT());
+					casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+					
+					hasMoved = true;
+					break;
+				
+				case 4: //Arriba
+					
+					casilla[filaAct-uno][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT());
+					casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+					
+					hasMoved = true;
+					break;
+					
+				default:
+					
+					System.out.println("Opción no válida");
+					
+					break;
+					
 			}
 		}
-		return casilla;
 		
-	}
-	
-	
-	public Terrain [][] moverTropas2(int filaAct, int columnaAct, Terrain casilla[][], int ladoMov, int cantidad) {
-		int uno=1, dos=2, tres=3, cuatro=4, cinco=5;
-		
-		
-		for (int i = 0; i<casilla.length; i++) {
-			
-			for (int j = 0; j <casilla[i].length; j++) {
-				
-					
-					switch(ladoMov) {
-					
-					case 1:	//Dcha
-						if((filaAct!=uno&&columnaAct!=cinco) && (filaAct!=dos&&columnaAct!=cinco) && (filaAct!=tres&&columnaAct!=cinco) && (filaAct!=cuatro&&columnaAct!=cinco) && (filaAct!=cinco&&columnaAct!=cinco)) {
-							columnaAct++;
-							cantidad-=uno;
-						}
-						break;
-					
-					case 2:	//Abajo
-						if((filaAct!=cinco&&columnaAct!=uno) && (filaAct!=cinco&&columnaAct!=dos) && (filaAct!=cinco&&columnaAct!=tres) && (filaAct!=cinco&&columnaAct!=cuatro) && (filaAct!=cinco&&columnaAct!=cinco)) {
-							filaAct--;
-							cantidad-=uno;
-						}
-						break;
-						
-					case 3:	//Izq
-						if((filaAct!=uno&&columnaAct!=uno) && (filaAct!=dos&&columnaAct!=uno) && (filaAct!=tres&&columnaAct!=uno) && (filaAct!=cuatro&&columnaAct!=uno) && (filaAct!=cinco&&columnaAct!=uno)) {
-							columnaAct--;
-							cantidad-=uno;
-						}
-						break;
-						
-					case 4:	//Arriba
-						if((filaAct!=uno&&columnaAct!=uno) && (filaAct!=uno&&columnaAct!=dos) && (filaAct!=uno&&columnaAct!=tres) && (filaAct!=uno&&columnaAct!=cuatro) && (filaAct!=uno&&columnaAct!=cinco)) {
-							filaAct--;
-							cantidad-=uno;
-						}
-						break;
-					
-					}
-	
-					
-				}
-				
-				
-			}
-		
-		return casilla;
-		
+		return hasMoved;
 	}
 	
 

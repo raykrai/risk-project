@@ -134,14 +134,29 @@ public class Principal {
 									System.out.println("Columna");
 									columnaAct=Leer.datoInt();
 									
-									m.imprimirOpcionesMovimiento();
+									System.out.println("Indica la cantidad deseada a mover");
+									cantidad=Leer.datoInt();
+									
+									m.imprimirMenuMovimiento(filaAct, columnaAct);
 									ladoMov=Leer.datoInt();
 									
 									if(cantidad>uno) {
+										
+										/*TODO METER CONDICIONALES PARA CONTROLAR EL MENÚ DE MOVIMIENTO - LUCAS
+										 * A
+										 * 
+										m.imprimirOpcionesMovimiento();
+										ladoMov=Leer.datoInt();
+										
+										*/
+										
+										
+										
+										
 										cB.moverTropas(filaAct, columnaAct, b.getCasilla(), ladoMov, cantidad);
 									}else {
 											System.out.println("Necesitas más tropas para poder moverte");
-										}
+									}
 									map.imprimirMapa(b);
 									
 									
@@ -166,16 +181,16 @@ public class Principal {
 										filaAtaque = Leer.datoInt();
 										
 										System.out.println("Columna");
-										columnaAct = Leer.datoInt();
+										columnaAtaque = Leer.datoInt();
 										
 										//TODO Finalizar comprobar distancia e incorporar método para comparar tirada de dados
 										
-										if (cB.comprobarDistancia(filaAct, columnaAct, dB.getCasilla(), filaAtaque, columnaAtaque) == true) {
-											System.out.println("Las tropas están al lado");
+										if (cB.comprobarDistancia(filaAct, columnaAct, filaAtaque, columnaAtaque) == true) {
+											//método para comparar las tiradas (donde se ejecutarán las tiradas
 										} else {
 											System.out.println("Las tropas están demasiado lejos");
 										}
-									} while (cB.comprobarDistancia(filaAct, columnaAct, dB.getCasilla(), filaAtaque, columnaAtaque) != true);
+									} while (cB.comprobarDistancia(filaAct, columnaAct, filaAtaque, columnaAtaque) != true);
 									
 									break;
 								
@@ -209,9 +224,9 @@ public class Principal {
 					
 					m.imprimirMenuReglas();
 					
-					/*TODO Testeando comprobar distancia, NO BORRAR POR FAVOR
+					//TODO Testeando comprobar distancia, NO BORRAR POR FAVOR
 					
-					map.imprimirMapa(b);
+					/*map.imprimirMapa(b);
 					
 					do {
 						
@@ -231,13 +246,12 @@ public class Principal {
 						System.out.println("Columna");
 						columnaAtaque = Leer.datoInt();
 						
-						if (cB.comprobarDistancia(filaAct, columnaAct, dB.getCasilla(), filaAtaque, columnaAtaque) == true) {
+						if (cB.comprobarDistancia(filaAct, columnaAct, filaAtaque, columnaAtaque) == true) {
 							System.out.println("Las tropas están al lado");
 						} else {
 							System.out.println("Las tropas están demasiado lejos");
 						}
-					} while (cB.comprobarDistancia(filaAct, columnaAct, dB.getCasilla(), filaAtaque, columnaAtaque) != true);
-					
+					} while (cB.comprobarDistancia(filaAct, columnaAct, filaAtaque, columnaAtaque) != true);
 					*/
 					
 					break;
