@@ -136,13 +136,15 @@ public class Principal {
 									columnaAct=Leer.datoInt();
 									
 									System.out.println("Indica la cantidad deseada a mover");
+									cantidad=Leer.datoInt();
 									
-									m.imprimirOpcionesMovimiento();
+									m.imprimirMenuMovimiento(filaAct, columnaAct);
 									ladoMov=Leer.datoInt();
 									
 									/*Cambiar este condicional a que si son tropas distintas a las de la facción actual del turnoA no pueda hacer eso*/ if(cantidad>uno) {
 										
 										/*TODO METER CONDICIONALES PARA CONTROLAR EL MENÚ DE MOVIMIENTO - LUCAS
+										 * A
 										 * 
 										m.imprimirOpcionesMovimiento();
 										ladoMov=Leer.datoInt();
