@@ -13,7 +13,8 @@ import view.Menu;
 public class Principal {
 
 	public static void main(String[] args) {
-		int turno = 2, opt, cero = 0, optC, filaAct=0, columnaAct=0, filaAtaque=0, columnaAtaque=0, ladoMov=0, cantidad, uno=1;
+		int turno = 2, opt, cero = 0, optC, filaAct=0, columnaAct=0, filaAtaque=0, columnaAtaque=0, ladoMov=0, cantidad, uno=1, quiereSalir;
+		boolean movFin;
 		String turnoActivo = "R";
 		String tipo;
 		
@@ -129,39 +130,43 @@ public class Principal {
 								
 								case 1:	//Mover tropas
 									
-									System.out.println("Indique la tropa que desea movilizar:");
-									System.out.println("Fila");
-									filaAct=Leer.datoInt();
-									System.out.println("Columna");
-									columnaAct=Leer.datoInt();
+									movFin = false;
 									
-									System.out.println("Indica la cantidad deseada a mover");
-									cantidad=Leer.datoInt();
+									do {
+										//TODO Meter condicional para pasar turno  
+										
+										System.out.println("Si deseas mover una tropa aliada a una posición aliada pulsa 0. Sin embargo, si no hay posición disponible, tendrás que pasar turno pulsando 1.");
+										
+										quiereSalir = Leer.datoInt();
+
+										if (quiereSalir == 0) {
+											
+											
+											System.out.println("Indique la tropa que desea movilizar:");
+											System.out.println("Fila");
+											filaAct=Leer.datoInt();
+											System.out.println("Columna");
+											columnaAct=Leer.datoInt();
+											
+											if (!dB.getCasilla()[filaAct-1][columnaAct-1].getEquipo().equals(turnoActivo) ) {
+												
+												System.out.println("Esas tropas no son tuyas");
+												
+											} else {
+												System.out.println("Indica la cantidad deseada a mover");
+												cantidad=Leer.datoInt();
+												
+												m.imprimirMenuMovimiento(filaAct, columnaAct);
+												ladoMov=Leer.datoInt();
+												movFin=cB.moverTropas(filaAct, columnaAct, b.getCasilla(), ladoMov, cantidad);
+											}
+											
+											
+										} else {
+											movFin = true;
+										}
+									} while (!movFin);
 									
-									m.imprimirMenuMovimiento(filaAct, columnaAct);
-									ladoMov=Leer.datoInt();
-									
-									/*Cambiar este condicional a que si son tropas distintas a las de la facción actual del turnoA no pueda hacer eso*/ if(cantidad>uno) {
-										
-										/*TODO METER CONDICIONALES PARA CONTROLAR EL MENÚ DE MOVIMIENTO - LUCAS
-										 * A
-										 * 
-										m.imprimirOpcionesMovimiento();
-										ladoMov=Leer.datoInt();
-										
-										*/
-										
-										
-										
-										
-										cB.moverTropas(filaAct, columnaAct, b.getCasilla(), ladoMov, cantidad);
-									}else {
-											System.out.println("Necesitas más tropas para poder moverte");
-									}
-									map.imprimirMapa(b);
-									
-									
-									//TODO meter bucle para mover 
 									break;
 								
 								case 2:
@@ -206,18 +211,18 @@ public class Principal {
 									break;
 							}
 							
+							//TODO Aquí controlo los turnos
+							if (turno%2 == cero) {
+								turnoActivo = "B";
+								System.out.println(turnoActivo);
+							} else {
+								turnoActivo = "R";
+								System.out.println(turnoActivo);
+							}
+							
+							turno++;
+							
 						} while (optC != 3);
-						
-						//TODO Aquí controlo los turnos
-						if (turno%2 == cero) {
-							turnoActivo = "A";
-							System.out.println(turnoActivo);
-						} else {
-							turnoActivo = "R";
-							System.out.println(turnoActivo);
-						}
-						
-						turno++;
 					
 					} while (!cP.comprobarGanador(b.getCasilla()));
 					break;
