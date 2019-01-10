@@ -69,6 +69,17 @@ public class ControllerBattle {
 	}
 	
 	
+	public boolean comprobarBatalla(int filaAct, int columnaAct, Terrain casilla[][], int filaAtaque, int columnaAtaque) {
+		
+		
+		
+		
+		
+		return true;
+		
+	}
+	
+	
 
 	
 	public boolean comprobarDistancia(int filaAct, int columnaAct, Terrain casilla[][], int filaAtaque, int columnaAtaque) {
