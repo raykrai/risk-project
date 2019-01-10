@@ -111,66 +111,49 @@ public class ControllerBattle {
 		//TODO AQUÍ UN IF ENORME PARA CONTROLAR FACCIÓN Y PARA CONTROLAR CANTIDAD
 		/* EL IF ENORME AQUÍ*/
 		//TODO DENTRO DEL ELSE TERMINAR DE CONTROLAR ESQUINAS Y LATERALES Y LAS CASILLAS DEL CENTRO
-		if ( filaAct == 0 && columnaAct == 0 && (ladoMov == 3 || ladoMov == 4) /* Casilla 1/1 (0/0) */) {
+		
+		if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct][columnaAct+uno].getEquipo())  || !casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct+uno][columnaAct].getEquipo()) || !casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct][columnaAct-uno].getEquipo()) || !casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct-uno][columnaAct].getEquipo()) ) {
 			
-			switch (ladoMov) {
+			System.out.println("¡No puedes mover tropas al terreno enemigo!");
 			
-				case 1: //Dcha
+		} else if (casilla[filaAct][columnaAct].getCanT()-cantidad <1){
+			
+			System.out.println("¡No puedes dejar tu terreno vacío!");
+			
+		} else {
+			
+			if ( filaAct == 0 && columnaAct == 0 /* Casilla 1/1 (0/0) */) {
 				
-					casilla[filaAct][columnaAct+uno].setCanT(casilla[filaAct][columnaAct].getCanT());
-					casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+				switch (ladoMov) {
+				
+					case 1: //Dcha
 					
-					hasMoved = true;
-					break;
-			
-				case 2: //Debajo
-					
-					casilla[filaAct+uno][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT());
-					casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
-					
-					hasMoved = true;
-					break;
-					
-				default:
-					
-					System.out.println("Opción no válida");
-					
-					break;
-			}
-			
-		} else if ( filaAct == 0 /* Fila 1(0) */ ){
-			switch (ladoMov) {
-			
-			case 1: //Dcha
+						casilla[filaAct][columnaAct+uno].setCanT(casilla[filaAct][columnaAct].getCanT());
+						casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+						
+						hasMoved = true;
+						break;
 				
-				casilla[filaAct][columnaAct+uno].setCanT(casilla[filaAct][columnaAct].getCanT());
-				casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+					case 2: //Debajo
+						
+						casilla[filaAct+uno][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT());
+						casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+						
+						hasMoved = true;
+						break;
+						
+					default:
+						
+						System.out.println("Opción no válida, no puedes salirte del tablero");
+						
+						break;
+				}
 				
-				hasMoved = true;
-				break;
-			
-			case 2: //Debajo
+			} else if ( filaAct == 0 && columnaAct == 4/* Esquina 1/5(0/4) */ ){
 				
-				casilla[filaAct+uno][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT());
-				casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+				switch (ladoMov) {
 				
-				hasMoved = true;
-				break;
-			
-			case 3: //Izq
-				
-				casilla[filaAct][columnaAct-uno].setCanT(casilla[filaAct][columnaAct].getCanT());
-				casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
-				
-				hasMoved = true;
-				break;
-			
-				
-			}
-		} else if (filaAct == 0 && columnaAct == 4) {
-			
-			switch (ladoMov) {
-			
+
 				case 1: //Debajo
 					
 					casilla[filaAct+uno][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT());
@@ -186,51 +169,99 @@ public class ControllerBattle {
 					
 					hasMoved = true;
 					break;
-			}
-		} else {
-			switch (ladoMov) {
-			
-				case 1: //Dcha
-					
-					casilla[filaAct][columnaAct+uno].setCanT(casilla[filaAct][columnaAct].getCanT());
-					casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
-					
-					hasMoved = true;
-					break;
-				
-				case 2: //Debajo
-					
-					casilla[filaAct+uno][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT());
-					casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
-					
-					hasMoved = true;
-					break;
-				
-				case 3: //Izq
-					
-					casilla[filaAct][columnaAct-uno].setCanT(casilla[filaAct][columnaAct].getCanT());
-					casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
-					
-					hasMoved = true;
-					break;
-				
-				case 4: //Arriba
-					
-					casilla[filaAct-uno][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT());
-					casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
-					
-					hasMoved = true;
-					break;
 					
 				default:
 					
-					System.out.println("Opción no válida");
+					System.out.println("Opción no válida, no puedes salirte del tablero");
 					
 					break;
 					
+				}
+			} else if (filaAct == 0 ) {
+				
+				switch (ladoMov) {
+				
+					case 1: //Dcha
+						
+						casilla[filaAct][columnaAct+uno].setCanT(casilla[filaAct][columnaAct].getCanT());
+						casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+						
+						hasMoved = true;
+						break;
+					
+					case 2: //Debajo
+						
+						casilla[filaAct+uno][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT());
+						casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+						
+						hasMoved = true;
+						break;
+					
+					case 3: //Izq
+						
+						casilla[filaAct][columnaAct-uno].setCanT(casilla[filaAct][columnaAct].getCanT());
+						casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+						
+						hasMoved = true;
+						break;
+						
+					default:
+						
+						System.out.println("Opción no válida, no puedes salirte del tablero");
+						
+						break;
+				}
+			} else if ( filaAct == 4 && columnaAct == 4){
+				switch (ladoMov) {
+
+					case 1: //Izq
+						
+						casilla[filaAct][columnaAct-uno].setCanT(casilla[filaAct][columnaAct].getCanT());
+						casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+						
+						hasMoved = true;
+						break;
+					
+					case 2: //Arriba
+						
+						casilla[filaAct-uno][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT());
+						casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+						
+						hasMoved = true;
+						break;
+						
+					default:
+						
+				}
+			} else if (filaAct == 4 && columnaAct == 0) {
+				switch (ladoMov) {
+					
+				
+					case 1: //Dcha
+					
+						casilla[filaAct][columnaAct+uno].setCanT(casilla[filaAct][columnaAct].getCanT());
+						casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+						
+						hasMoved = true;
+						break;
+						
+					case 2: //Arriba
+						
+						casilla[filaAct-uno][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT());
+						casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+						
+						hasMoved = true;
+						break;
+					
+					default:
+						System.out.println("Opción no válida");
+						break;
+						
+				}
+			} else {
+				
 			}
-		}
-		
+		}	
 		return hasMoved;
 	}
 	

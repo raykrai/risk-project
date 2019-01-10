@@ -128,6 +128,7 @@ public class Principal {
 							switch (optC) {
 								
 								case 1:	//Mover tropas
+									
 									System.out.println("Indique la tropa que desea movilizar:");
 									System.out.println("Fila");
 									filaAct=Leer.datoInt();
@@ -139,7 +140,7 @@ public class Principal {
 									m.imprimirOpcionesMovimiento();
 									ladoMov=Leer.datoInt();
 									
-									if(cantidad>uno) {
+									/*Cambiar este condicional a que si son tropas distintas a las de la facción actual del turnoA no pueda hacer eso*/ if(cantidad>uno) {
 										
 										/*TODO METER CONDICIONALES PARA CONTROLAR EL MENÚ DE MOVIMIENTO - LUCAS
 										 * 
