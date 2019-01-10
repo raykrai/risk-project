@@ -214,10 +214,10 @@ public class Principal {
 							//TODO Aquí controlo los turnos
 							if (turno%2 == cero) {
 								turnoActivo = "B";
-								System.out.println(turnoActivo);
+								//System.out.println(turnoActivo);
 							} else {
 								turnoActivo = "R";
-								System.out.println(turnoActivo);
+								//System.out.println(turnoActivo);
 							}
 							
 							turno++;
