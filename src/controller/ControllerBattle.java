@@ -32,16 +32,16 @@ public class ControllerBattle {
 	}
 	
 	//Cuando atacas devuelves un int que indica tu tirada.
-	public int atacarTropas(int filaAct, int columnaAct, Terrain casilla[][], int filaAtaque, int columnaAtaque) {
+	public int atacar(int filaAct, int columnaAct, Terrain casilla[][], int filaAtaque, int columnaAtaque) {
 		
 		int cien =100;
 		int cero=0;
 		int tirada=0;
 		
 			
-			if(casilla[filaAct-1][columnaAct-1].getTipo().equals("Artilleria")){
+			if(casilla[filaAct-1][columnaAct-1].getTipo().equals("A")){
 				
-				if(casilla[filaAtaque-1][columnaAtaque-1].getT().getTipo().equals("Infanteria")) {
+				if(casilla[filaAtaque-1][columnaAtaque-1].getT().getTipo().equals("Inf")) {
 					tirada=tirarDadox1()*cien;
 				}else {
 					tirada=tirarDadox1()*cero;
@@ -64,13 +64,13 @@ public class ControllerBattle {
 			
 	
 	
-	public int defensor(int filaAct, int columnaAct, Terrain casilla[][], int filaAtaque, int columnaAtaque) {
+	public int defender(int filaAct, int columnaAct, Terrain casilla[][], int filaAtaque, int columnaAtaque) {
 		
 		int tiradaD=0, cien=100, cero=0;
 		
-		if(casilla[filaAtaque-1][columnaAtaque-1].getTipo().equals("Artilleria")) {
+		if(casilla[filaAtaque-1][columnaAtaque-1].getTipo().equals("A")) {
 			
-			if(casilla[filaAct-1][columnaAct-1].getT().getTipo().equals("Infanteria")) {
+			if(casilla[filaAct-1][columnaAct-1].getT().getTipo().equals("Inf")) {
 				tiradaD=tirarDadox1()*cien;
 			}else {
 				tiradaD=tirarDadox1()*cero;
@@ -97,9 +97,11 @@ public class ControllerBattle {
 		
 		boolean atacanteGanador;
 		
-		if(atacarTropas(filaAct, columnaAct, casilla, filaAtaque, columnaAtaque)>=defensor(filaAct, columnaAct, casilla, filaAtaque, columnaAtaque)  ) {
+		if(atacar(filaAct, columnaAct, casilla, filaAtaque, columnaAtaque)>=defender(filaAct, columnaAct, casilla, filaAtaque, columnaAtaque)  ) {
+			System.out.println("El atacante ha ganado");
 			atacanteGanador=true;
 		}else {
+			System.out.println("El atacante ha perdido");
 			atacanteGanador=false;
 		}
 		

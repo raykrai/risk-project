@@ -169,7 +169,7 @@ public class Principal {
 									
 									break;
 								
-								case 2:
+								case 2: //Atacar tropas
 									
 									do {
 										
@@ -192,7 +192,11 @@ public class Principal {
 										//TODO Finalizar comprobar distancia e incorporar método para comparar tirada de dados
 										
 										if (cB.comprobarDistancia(filaAct, columnaAct, filaAtaque, columnaAtaque) == true) {
+											
+											cB.comprobarBatalla(filaAct, columnaAct, dB.getCasilla(), filaAtaque, columnaAtaque);
+											
 											//método para comparar las tiradas (donde se ejecutarán las tiradas
+											
 										} else {
 											System.out.println("Las tropas están demasiado lejos");
 										}
