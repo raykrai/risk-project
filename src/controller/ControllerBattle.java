@@ -8,6 +8,8 @@ import model.Troop;
 
 
 public class ControllerBattle {
+
+//Métodos de probabilidad necesarios en el método de combate
 	
 	public int tirarDadox1(){
 		Random r = new Random (System.nanoTime());
@@ -31,14 +33,14 @@ public class ControllerBattle {
 		return resul;
 	}
 	
-	//Cuando atacas devuelves un int que indica tu tirada.
+//Método de combate que usa la probabilidad de arriba para sacar la tirada del atacante
+	
 	public int atacar(int filaAct, int columnaAct, Terrain casilla[][], int filaAtaque, int columnaAtaque) {
 		
 		int cien =100;
 		int cero=0;
 		int tirada=0;
 		
-			
 			if(casilla[filaAct-1][columnaAct-1].getTipo().equals("A")){
 				
 				if(casilla[filaAtaque-1][columnaAtaque-1].getT().getTipo().equals("Inf")) {
@@ -47,10 +49,10 @@ public class ControllerBattle {
 					tirada=tirarDadox1()*cero;
 				}
 				
-				}else if(comprobarTerreno(casilla,filaAct,columnaAct)==2 && casilla[filaAct][columnaAct].getCanT() > casilla[filaAtaque-1][columnaAtaque-1].getCanT()) {
-				tirada=tirarDadox3();
-			
-					
+				}else if(comprobarTerreno(casilla,filaAct,columnaAct)==2 && casilla[filaAct-1][columnaAct-1].getCanT() > casilla[filaAtaque-1][columnaAtaque-1].getCanT()) {
+				
+					tirada=tirarDadox3();
+				
 				}else if(comprobarTerreno(casilla,filaAct,columnaAct)==2) {
 					
 					tirada=tirarDadox2();
@@ -60,9 +62,10 @@ public class ControllerBattle {
 				}
 			
 			return tirada;
-			}
+	}
 			
 	
+//Método de combate que usa la probabilidad de arriba para sacar la tirada del defensor
 	
 	public int defender(int filaAct, int columnaAct, Terrain casilla[][], int filaAtaque, int columnaAtaque) {
 		
@@ -75,7 +78,7 @@ public class ControllerBattle {
 			}else {
 				tiradaD=tirarDadox1()*cero;
 			}
-		}else if(comprobarTerreno(casilla,filaAtaque,columnaAtaque)==2 && casilla[filaAtaque][columnaAtaque].getCanT() > casilla[filaAtaque-1][columnaAct-1].getCanT()) {
+		}else if(comprobarTerreno(casilla,filaAtaque,columnaAtaque)==2 && casilla[filaAtaque-1][columnaAtaque-1].getCanT() > casilla[filaAtaque-1][columnaAct-1].getCanT()) {
 				tiradaD=tirarDadox3();
 					
 		}else if(comprobarTerreno(casilla,filaAtaque,columnaAtaque)==2) {
@@ -92,6 +95,7 @@ public class ControllerBattle {
 	
 	
 	
+//Método de combate que compara las dos tiradas conseguidas con los anteriores métodos de combate y devuelve si el ganador ha sido el atacante o si no lo ha sido.
 	
 	public boolean comprobarBatalla(int filaAct, int columnaAct, Terrain casilla[][], int filaAtaque, int columnaAtaque) {
 		
@@ -105,14 +109,35 @@ public class ControllerBattle {
 			atacanteGanador=false;
 		}
 		
-		
-		
 		return atacanteGanador;
 		
 	}
 	
+//Método final del combate que cambia los atributos del terreno en función del que haya ganado en el ataque.
 	
-
+	public void conquistarTerreno(boolean atacanteGanador, int filaAct, int columnaAct, Terrain casilla[][], int filaAtaque, int columnaAtaque) {
+		int uno = 1;
+		filaAct -= 1;
+		columnaAct -= 1;
+		
+		filaAtaque -= 1;
+		columnaAtaque -= 1;
+		
+		if (atacanteGanador) {
+			
+			//Avanzan las tropas del ganador
+			casilla[filaAtaque][columnaAtaque].setCanT(casilla[filaAct][columnaAct].getCanT());
+			casilla[filaAtaque][columnaAtaque].getT().setTipo(casilla[filaAct][columnaAct].getT().getTipo());
+			//Reclama la facción el terreno
+			casilla[filaAtaque][columnaAtaque].setEquipo(casilla[filaAct][columnaAct].getEquipo());
+			//Genera una tropa defensora en su anterior posición
+			casilla[filaAct][columnaAct].setCanT(uno);
+		} else {
+			//En caso de que pierda el ataque se queda con una tropa defensora
+			casilla[filaAct][columnaAct].setCanT(uno); 
+		}
+	}
+//Método usado en el main para comprobar si la tropa a atacar está cerca o no
 	
 	public boolean comprobarDistancia(int filaAct, int columnaAct, int filaAtaque, int columnaAtaque) {
 		
@@ -127,6 +152,7 @@ public class ControllerBattle {
 		return isNear;
 	}
 	
+//Método usado en los métodos de tirar dados para sacar las ventajas en cuanto al terreno dependiendo del tipo de tropa
 	
 	public int comprobarTerreno(Terrain casilla[][], int filaAct, int columnaAct) {
 		int vent=1, uno=1;
@@ -146,29 +172,138 @@ public class ControllerBattle {
 		return vent;
 	}
 	
+//Métodos para mover en las distintas direcciones (posteriormente se llaman en el macro método moverTropas depende de la dirección que elija el usuario). Además rechazan movimientos a casillas que no te pertenezcan o con distinto tipo de tropa
 	
+	//Dcha
 	
-	public boolean moverTropas(int filaAct, int columnaAct, Terrain casilla[][], int ladoMov, int cantidad) {
-		int uno=1, dos=2, tres=3, cuatro=4, cero=0;
+	public boolean moverDerecha(int filaAct, int columnaAct, Terrain casilla[][], int ladoMov, int cantidad) {
+		
+		int uno = 1;
 		
 		boolean hasMoved = false;
+		
+		if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct][columnaAct+uno].getEquipo()) && !casilla[filaAct][columnaAct+uno].getEquipo().equals("N")) {
+			System.out.println("Esa casilla no te pertenece");
+		} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct][columnaAct+uno].getT().getTipo() ) ){
+			System.out.println("No puedes agrupar dos tipos distintos de tropa");
+		} else {
+			casilla[filaAct][columnaAct+uno].setCanT(casilla[filaAct][columnaAct+uno].getCanT()+cantidad);
+			casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+			
+			if (casilla[filaAct][columnaAct+uno].getEquipo().equals("N")) {
+				casilla[filaAct][columnaAct+uno].setEquipo(casilla[filaAct][columnaAct].getEquipo());
+			}
+			
+			hasMoved = true;
+		}
+		return hasMoved;
+	}
+	
+	//Dbajo
+	
+	public boolean moverDebajo(int filaAct, int columnaAct, Terrain casilla[][], int ladoMov, int cantidad) {
+		
+		int uno = 1;
+		
+		boolean hasMoved = false;
+		
+		if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct+uno][columnaAct].getEquipo()) && !casilla[filaAct+uno][columnaAct].getEquipo().equals("N")) {
+			System.out.println("Esa casilla no te pertenece");
+		} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct+uno][columnaAct].getT().getTipo() ) ){
+			System.out.println("No puedes agrupar dos tipos distintos de tropa");
+		} else {
+			casilla[filaAct+uno][columnaAct].setCanT(casilla[filaAct+uno][columnaAct].getCanT()+cantidad);
+			casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+
+			if (casilla[filaAct+uno][columnaAct].getEquipo().equals("N")) {
+				casilla[filaAct+uno][columnaAct].setEquipo(casilla[filaAct][columnaAct].getEquipo());
+			}
+			
+			hasMoved = true;
+		}
+		
+		return hasMoved;
+	}
+
+	//Izq
+	
+	public boolean moverIzquierda(int filaAct, int columnaAct, Terrain casilla[][], int ladoMov, int cantidad) {
+		
+		int uno = 1;
+		
+		boolean hasMoved = false;
+		
+		if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct][columnaAct-uno].getEquipo()) && !casilla[filaAct][columnaAct-uno].getEquipo().equals("N")) {
+			System.out.println("Esa casilla no te pertenece");
+		} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct][columnaAct-uno].getT().getTipo() ) ){
+			System.out.println("No puedes agrupar dos tipos distintos de tropa");
+		} else {
+			casilla[filaAct][columnaAct-uno].setCanT(casilla[filaAct][columnaAct-uno].getCanT()+cantidad);
+			casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+
+			if (casilla[filaAct][columnaAct-uno].getEquipo().equals("N")) {
+				casilla[filaAct][columnaAct-uno].setEquipo(casilla[filaAct][columnaAct].getEquipo());
+			}
+			
+			hasMoved = true;
+		}
+		
+		return hasMoved;
+	}
+	
+	//Arriba
+	
+	public boolean moverArriba(int filaAct, int columnaAct, Terrain casilla[][], int ladoMov, int cantidad) {
+		
+		int uno = 1;
+		
+		boolean hasMoved = false;
+		
+		if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct-uno][columnaAct].getEquipo()) && !casilla[filaAct-uno][columnaAct].getEquipo().equals("N")) {
+			System.out.println("Esa casilla no te pertenece");
+		} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct-uno][columnaAct].getT().getTipo() ) ){
+			System.out.println("No puedes agrupar dos tipos distintos de tropa");
+		} else {
+			casilla[filaAct-uno][columnaAct].setCanT(casilla[filaAct-uno][columnaAct].getCanT()+cantidad);
+			casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+			
+			if (casilla[filaAct-uno][columnaAct].getEquipo().equals("N")) {
+				casilla[filaAct-uno][columnaAct].setEquipo(casilla[filaAct][columnaAct].getEquipo());
+			}
+			
+			hasMoved = true;
+		}
+		
+		return hasMoved;
+	}
+	
+	
+//Macro método principal controlador del movimiento de las tropas (función número 1 en la partida)
+
+	
+	public boolean moverTropas(int filaAct, int columnaAct, Terrain casilla[][], int ladoMov, int cantidad) {
+		
+		//Se definen variables necesarias
+		
+		int uno=1;
+		
+		boolean hasMoved = false;
+		
+		//Se ajustan las variables a la posición real del array
 		
 		filaAct -= uno;
 		columnaAct -= uno;
 		
-		//TODO AQUÍ UN IF ENORME PARA CONTROLAR FACCIÓN Y PARA CONTROLAR CANTIDAD
-		/* EL IF ENORME AQUÍ*/
-		//TODO DENTRO DEL ELSE TERMINAR DE CONTROLAR ESQUINAS Y LATERALES Y LAS CASILLAS DEL CENTRO
+		//Aquí empieza la fiesta :^)
 		
-		//if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct][columnaAct+uno].getEquipo())  || !casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct+uno][columnaAct].getEquipo()) || !casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct][columnaAct-uno].getEquipo()) || !casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct-uno][columnaAct].getEquipo()) ) {
-			
-		//	System.out.println("¡No puedes mover tropas al terreno enemigo!");
-		
+		//Condicional para controlar que no se quede ningún terreno vacío
 		if (casilla[filaAct][columnaAct].getCanT()-cantidad <1){
 			
 			System.out.println("¡No puedes dejar tu terreno vacío!");
 			
 		} else {
+			
+		//Cada if de aquí dentro controla los límites (esquinas, laterales e interiores)
 			
 			if ( filaAct == 0 && columnaAct == 0) { //Esquina superior izquierda
 				
@@ -176,32 +311,14 @@ public class ControllerBattle {
 				
 					case 1: //Dcha
 						
-						if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct][columnaAct+uno].getEquipo()) && !casilla[filaAct][columnaAct].getEquipo().equals("N")) {
-							System.out.println("Esa casilla no te pertenece");
-						} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct][columnaAct+uno].getT().getTipo() ) ){
-							System.out.println("No puedes agrupar dos tipos distintos de tropa");
-						} else {
-							
-							casilla[filaAct][columnaAct+uno].setCanT(casilla[filaAct][columnaAct+uno].getCanT()+cantidad);
-							casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
-						
-							hasMoved = true;
-						}
+						hasMoved = moverDerecha(filaAct, columnaAct, casilla, ladoMov, cantidad);
 						
 						break;
 				
 					case 2: //Debajo
 						
-						if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct+uno][columnaAct].getEquipo()) && !casilla[filaAct][columnaAct].getEquipo().equals("N")) {
-							System.out.println("Esa casilla no te pertenece");
-						} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct+uno][columnaAct].getT().getTipo() ) ){
-							System.out.println("No puedes agrupar dos tipos distintos de tropa");
-						} else {
-							casilla[filaAct+uno][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT());
-							casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
-							
-							hasMoved = true;
-						}
+						hasMoved = moverDebajo(filaAct, columnaAct, casilla, ladoMov, cantidad);
+						
 						break;
 						
 					default:
@@ -218,30 +335,14 @@ public class ControllerBattle {
 
 				case 1: //Debajo
 					
-					if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct+uno][columnaAct].getEquipo()) && !casilla[filaAct][columnaAct].getEquipo().equals("N")) {
-						System.out.println("Esa casilla no te pertenece");
-					} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct+uno][columnaAct].getT().getTipo() ) ){
-						System.out.println("No puedes agrupar dos tipos distintos de tropa");
-					} else {
-						casilla[filaAct+uno][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT());
-						casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
-						
-						hasMoved = true;
-					}
+					hasMoved = moverDebajo(filaAct, columnaAct, casilla, ladoMov, cantidad);
+					
 					break;
 				
 				case 2: //Izq
 					
-					if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct][columnaAct-uno].getEquipo()) && !casilla[filaAct][columnaAct].getEquipo().equals("N")) {
-						System.out.println("Esa casilla no te pertenece");
-					} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct][columnaAct-uno].getT().getTipo() ) ){
-						System.out.println("No puedes agrupar dos tipos distintos de tropa");
-					} else {
-						casilla[filaAct][columnaAct-uno].setCanT(casilla[filaAct][columnaAct].getCanT());
-						casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+					hasMoved = moverIzquierda(filaAct, columnaAct, casilla, ladoMov, cantidad);
 					
-						hasMoved = true;
-					}
 					break;
 					
 				default:
@@ -257,46 +358,20 @@ public class ControllerBattle {
 				
 					case 1: //Dcha
 						
-						if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct][columnaAct+uno].getEquipo()) && !casilla[filaAct][columnaAct].getEquipo().equals("N")) {
-							System.out.println("Esa casilla no te pertenece");
-						} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct][columnaAct+uno].getT().getTipo() ) ){
-							System.out.println("No puedes agrupar dos tipos distintos de tropa");
-						} else {
-							
-							casilla[filaAct][columnaAct+uno].setCanT(casilla[filaAct][columnaAct+uno].getCanT()+cantidad);
-							casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
-						
-							hasMoved = true;
-						}
+						hasMoved = moverDerecha(filaAct, columnaAct, casilla, ladoMov, cantidad);
 						
 						break;
 					
 					case 2: //Debajo
 						
-						if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct+uno][columnaAct].getEquipo()) && !casilla[filaAct][columnaAct].getEquipo().equals("N")) {
-							System.out.println("Esa casilla no te pertenece");
-						} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct+uno][columnaAct].getT().getTipo() ) ){
-							System.out.println("No puedes agrupar dos tipos distintos de tropa");
-						} else {
-							casilla[filaAct+uno][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT());
-							casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
-							
-							hasMoved = true;
-						}
+						hasMoved = moverDebajo(filaAct, columnaAct, casilla, ladoMov, cantidad);
+						
 						break;
 					
 					case 3: //Izq
 						
-						if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct][columnaAct-uno].getEquipo()) && !casilla[filaAct][columnaAct].getEquipo().equals("N")) {
-							System.out.println("Esa casilla no te pertenece");
-						} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct][columnaAct-uno].getT().getTipo() ) ){
-							System.out.println("No puedes agrupar dos tipos distintos de tropa");
-						} else {
-							casilla[filaAct][columnaAct-uno].setCanT(casilla[filaAct][columnaAct].getCanT());
-							casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+						hasMoved = moverIzquierda(filaAct, columnaAct, casilla, ladoMov, cantidad);
 						
-							hasMoved = true;
-						}
 						break;
 						
 					default:
@@ -311,30 +386,14 @@ public class ControllerBattle {
 
 					case 1: //Izq
 						
-						if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct][columnaAct-uno].getEquipo()) && !casilla[filaAct][columnaAct].getEquipo().equals("N")) {
-							System.out.println("Esa casilla no te pertenece");
-						} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct][columnaAct-uno].getT().getTipo() ) ){
-							System.out.println("No puedes agrupar dos tipos distintos de tropa");
-						} else {
-							casilla[filaAct][columnaAct-uno].setCanT(casilla[filaAct][columnaAct].getCanT());
-							casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+						hasMoved = moverIzquierda(filaAct, columnaAct, casilla, ladoMov, cantidad);
 						
-							hasMoved = true;
-						}
 						break;
 					
 					case 2: //Arriba
 						
-						if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct-uno][columnaAct].getEquipo()) && !casilla[filaAct][columnaAct].getEquipo().equals("N")) {
-							System.out.println("Esa casilla no te pertenece");
-						} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct-uno][columnaAct].getT().getTipo() ) ){
-							System.out.println("No puedes agrupar dos tipos distintos de tropa");
-						} else {
-							casilla[filaAct-uno][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT());
-							casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+						hasMoved = moverArriba(filaAct, columnaAct, casilla, ladoMov, cantidad);
 							
-							hasMoved = true;
-						}	
 						break;
 						
 					default:
@@ -351,32 +410,14 @@ public class ControllerBattle {
 				
 					case 1: //Dcha
 					
-						if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct][columnaAct+uno].getEquipo()) && !casilla[filaAct][columnaAct].getEquipo().equals("N")) {
-							System.out.println("Esa casilla no te pertenece");
-						} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct][columnaAct+uno].getT().getTipo() ) ){
-							System.out.println("No puedes agrupar dos tipos distintos de tropa");
-						} else {
-							
-							casilla[filaAct][columnaAct+uno].setCanT(casilla[filaAct][columnaAct+uno].getCanT()+cantidad);
-							casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
-						
-							hasMoved = true;
-						}
+						hasMoved = moverDerecha(filaAct, columnaAct, casilla, ladoMov, cantidad);
 						
 						break;
 						
 					case 2: //Arriba
 
-						if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct-uno][columnaAct].getEquipo()) && !casilla[filaAct][columnaAct].getEquipo().equals("N")) {
-							System.out.println("Esa casilla no te pertenece");
-						} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct-uno][columnaAct].getT().getTipo() ) ){
-							System.out.println("No puedes agrupar dos tipos distintos de tropa");
-						} else {
-							casilla[filaAct-uno][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT());
-							casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+						hasMoved = moverArriba(filaAct, columnaAct, casilla, ladoMov, cantidad);
 							
-							hasMoved = true;
-						}	
 						break;
 					
 					default:
@@ -390,46 +431,20 @@ public class ControllerBattle {
 				
 					case 1: //Dcha
 						
-						if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct][columnaAct+uno].getEquipo()) && !casilla[filaAct][columnaAct].getEquipo().equals("N")) {
-							System.out.println("Esa casilla no te pertenece");
-						} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct][columnaAct+uno].getT().getTipo() ) ){
-							System.out.println("No puedes agrupar dos tipos distintos de tropa");
-						} else {
-							
-							casilla[filaAct][columnaAct+uno].setCanT(casilla[filaAct][columnaAct+uno].getCanT()+cantidad);
-							casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
-						
-							hasMoved = true;
-						}
+						hasMoved = moverDerecha(filaAct, columnaAct, casilla, ladoMov, cantidad);
 						
 						break;
 					
 					case 2: //Arriba
 
-						if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct-uno][columnaAct].getEquipo()) && !casilla[filaAct][columnaAct].getEquipo().equals("N")) {
-							System.out.println("Esa casilla no te pertenece");
-						} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct-uno][columnaAct].getT().getTipo() ) ){
-							System.out.println("No puedes agrupar dos tipos distintos de tropa");
-						} else {
-							casilla[filaAct-uno][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT());
-							casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+						hasMoved = moverArriba(filaAct, columnaAct, casilla, ladoMov, cantidad);
 							
-							hasMoved = true;
-						}	
 						break;
 						
 					case 3: //Debajo
 						
-						if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct+uno][columnaAct].getEquipo()) && !casilla[filaAct][columnaAct].getEquipo().equals("N")) {
-							System.out.println("Esa casilla no te pertenece");
-						} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct+uno][columnaAct].getT().getTipo() ) ){
-							System.out.println("No puedes agrupar dos tipos distintos de tropa");
-						} else {
-							casilla[filaAct+uno][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT());
-							casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
-							
-							hasMoved = true;
-						}
+						hasMoved = moverDebajo(filaAct, columnaAct, casilla, ladoMov, cantidad);
+						
 						break;
 					
 					default:
@@ -443,44 +458,20 @@ public class ControllerBattle {
 				
 					case 1: //Izq
 					
-						if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct][columnaAct-uno].getEquipo()) && !casilla[filaAct][columnaAct].getEquipo().equals("N")) {
-							System.out.println("Esa casilla no te pertenece");
-						} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct][columnaAct-uno].getT().getTipo() ) ){
-							System.out.println("No puedes agrupar dos tipos distintos de tropa");
-						} else {
-							casilla[filaAct][columnaAct-uno].setCanT(casilla[filaAct][columnaAct].getCanT());
-							casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+						hasMoved = moverIzquierda(filaAct, columnaAct, casilla, ladoMov, cantidad);
 						
-							hasMoved = true;
-						}
 						break;
 					
 					case 2: //Arriba
 
-						if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct-uno][columnaAct].getEquipo()) && !casilla[filaAct][columnaAct].getEquipo().equals("N")) {
-							System.out.println("Esa casilla no te pertenece");
-						} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct-uno][columnaAct].getT().getTipo() ) ){
-							System.out.println("No puedes agrupar dos tipos distintos de tropa");
-						} else {
-							casilla[filaAct-uno][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT());
-							casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+						hasMoved = moverArriba(filaAct, columnaAct, casilla, ladoMov, cantidad);
 							
-							hasMoved = true;
-						}	
 						break;
 						
 					case 3: //Debajo
 						
-						if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct+uno][columnaAct].getEquipo()) && !casilla[filaAct][columnaAct].getEquipo().equals("N")) {
-							System.out.println("Esa casilla no te pertenece");
-						} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct+uno][columnaAct].getT().getTipo() ) ){
-							System.out.println("No puedes agrupar dos tipos distintos de tropa");
-						} else {
-							casilla[filaAct+uno][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT());
-							casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
-							
-							hasMoved = true;
-						}
+						hasMoved = moverDebajo(filaAct, columnaAct, casilla, ladoMov, cantidad);
+						
 						break;
 					
 					default:
@@ -493,46 +484,20 @@ public class ControllerBattle {
 				
 					case 1: //Dcha
 						
-						if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct][columnaAct+uno].getEquipo()) && !casilla[filaAct][columnaAct].getEquipo().equals("N")) {
-							System.out.println("Esa casilla no te pertenece");
-						} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct][columnaAct+uno].getT().getTipo() ) ){
-							System.out.println("No puedes agrupar dos tipos distintos de tropa");
-						} else {
-							
-							casilla[filaAct][columnaAct+uno].setCanT(casilla[filaAct][columnaAct+uno].getCanT()+cantidad);
-							casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
-						
-							hasMoved = true;
-						}
+						hasMoved = moverDerecha(filaAct, columnaAct, casilla, ladoMov, cantidad);
 						
 						break;
 					
 					case 2: //Arriba
 
-						if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct-uno][columnaAct].getEquipo()) && !casilla[filaAct][columnaAct].getEquipo().equals("N")) {
-							System.out.println("Esa casilla no te pertenece");
-						} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct-uno][columnaAct].getT().getTipo() ) ){
-							System.out.println("No puedes agrupar dos tipos distintos de tropa");
-						} else {
-							casilla[filaAct-uno][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT());
-							casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+						hasMoved = moverArriba(filaAct, columnaAct, casilla, ladoMov, cantidad);
 							
-							hasMoved = true;
-						}	
 						break;
 					
 					case 3: //Izq
 						
-						if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct][columnaAct-uno].getEquipo()) && !casilla[filaAct][columnaAct].getEquipo().equals("N")) {
-							System.out.println("Esa casilla no te pertenece");
-						} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct][columnaAct-uno].getT().getTipo() ) ){
-							System.out.println("No puedes agrupar dos tipos distintos de tropa");
-						} else {
-							casilla[filaAct][columnaAct-uno].setCanT(casilla[filaAct][columnaAct].getCanT());
-							casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+						hasMoved = moverIzquierda(filaAct, columnaAct, casilla, ladoMov, cantidad);
 						
-							hasMoved = true;
-						}
 						break;
 						
 					default:
@@ -547,60 +512,26 @@ public class ControllerBattle {
 
 					case 1: //Izq
 						
-						if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct][columnaAct-uno].getEquipo()) && !casilla[filaAct][columnaAct].getEquipo().equals("N")) {
-							System.out.println("Esa casilla no te pertenece");
-						} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct][columnaAct-uno].getT().getTipo() ) ){
-							System.out.println("No puedes agrupar dos tipos distintos de tropa");
-						} else {
-							casilla[filaAct][columnaAct-uno].setCanT(casilla[filaAct][columnaAct].getCanT());
-							casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+						hasMoved = moverIzquierda(filaAct, columnaAct, casilla, ladoMov, cantidad);
 						
-							hasMoved = true;
-						}
 						break;
 					
 					case 2: //Arriba
 
-						if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct-uno][columnaAct].getEquipo()) && !casilla[filaAct][columnaAct].getEquipo().equals("N")) {
-							System.out.println("Esa casilla no te pertenece");
-						} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct-uno][columnaAct].getT().getTipo() ) ){
-							System.out.println("No puedes agrupar dos tipos distintos de tropa");
-						} else {
-							casilla[filaAct-uno][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT());
-							casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
+						hasMoved = moverArriba(filaAct, columnaAct, casilla, ladoMov, cantidad);
 							
-							hasMoved = true;
-						}	
 						break;
 					
 					case 3: //Dcha
 	
-						if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct][columnaAct+uno].getEquipo()) && !casilla[filaAct][columnaAct+uno].getEquipo().equals("N")) {
-							System.out.println("Esa casilla no te pertenece");
-						} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct][columnaAct+uno].getT().getTipo() ) ){
-							System.out.println("No puedes agrupar dos tipos distintos de tropa");
-						} else {
-							
-							casilla[filaAct][columnaAct+uno].setCanT(casilla[filaAct][columnaAct+uno].getCanT()+cantidad);
-							casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
-						
-							hasMoved = true;
-						}
+						hasMoved = moverDerecha(filaAct, columnaAct, casilla, ladoMov, cantidad);
 						
 						break;
 					
 					case 4: //Debajo
 	
-						if (!casilla[filaAct][columnaAct].getEquipo().equals(casilla[filaAct+uno][columnaAct].getEquipo()) && !casilla[filaAct][columnaAct].getEquipo().equals("N")) {
-							System.out.println("Esa casilla no te pertenece");
-						} else if ( !casilla[filaAct][columnaAct].getT().getTipo().equals( casilla[filaAct+uno][columnaAct].getT().getTipo() ) ){
-							System.out.println("No puedes agrupar dos tipos distintos de tropa");
-						} else {
-							casilla[filaAct+uno][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT());
-							casilla[filaAct][columnaAct].setCanT(casilla[filaAct][columnaAct].getCanT()-cantidad);
-							
-							hasMoved = true;
-						}
+						hasMoved = moverDebajo(filaAct, columnaAct, casilla, ladoMov, cantidad);
+						
 						break;
 						
 					default:

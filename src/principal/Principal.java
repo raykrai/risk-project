@@ -14,7 +14,7 @@ public class Principal {
 
 	public static void main(String[] args) {
 		int turno = 2, opt, cero = 0, optC, filaAct=0, columnaAct=0, filaAtaque=0, columnaAtaque=0, ladoMov=0, cantidad, uno=1, quiereSalir;
-		boolean movFin;
+		boolean movFin, atqFin;
 		String turnoActivo = "R";
 		String tipo;
 		
@@ -44,6 +44,7 @@ public class Principal {
 					
 				case 1:
 					
+					m.imprimirComienzoPartida();
 					System.out.println("Primero elegirá las posiciones el jugador Red (R)\n");
 					
 					do {
@@ -52,9 +53,16 @@ public class Principal {
 						
 						System.out.println("Te quedan "+DataPlayer.getArrayJugadores()[0].getCanT()+" tropas");
 						System.out.println("Elige el tipo de tropa a colocar:");
-						System.out.println("Inf o Cab");
 						
-						tipo = Leer.dato();
+						do {
+							System.out.println("Inf o Cab");
+							
+							tipo = Leer.dato();
+							
+							if (!tipo.equals("Inf") && !tipo.equals("Cab")) {
+								System.out.println("Elige un tipo de tropa existente");
+							}
+						} while (!tipo.equals("Inf") && !tipo.equals("Cab"));
 						
 						System.out.println("Elige la cantidad de tropas a colocar");
 						
@@ -135,7 +143,7 @@ public class Principal {
 									do {
 										//TODO Meter condicional para pasar turno  
 										
-										System.out.println("Si deseas mover una tropa aliada a una posición aliada pulsa 0. Sin embargo, si no hay posición disponible, tendrás que pasar turno pulsando 1.");
+										System.out.println("Si deseas mover una tropa aliada a una posición aliada pulsa 0. Sin embargo, si no hay posición disponible, tendrás que pasar turno pulsando cualquier otro número.");
 										
 										quiereSalir = Leer.datoInt();
 
@@ -171,36 +179,47 @@ public class Principal {
 								
 								case 2: //Atacar tropas
 									
+									atqFin = false;
+									
 									do {
 										
-										System.out.println("Indique la tropa con la que desea atacar");
+										System.out.println("Si deseas realizar un ataque pulsa 0. Sin embargo, si prefieres/tienes que pasar turno pulsa cualquier otro número.");
 										
-										System.out.println("Fila");
-										filaAct = Leer.datoInt();
+										quiereSalir = Leer.datoInt();
 										
-										System.out.println("Columna");
-										columnaAct = Leer.datoInt();
-										
-										System.out.println("Indique el terreno o casilla a atacar");
-										
-										System.out.println("Fila");
-										filaAtaque = Leer.datoInt();
-										
-										System.out.println("Columna");
-										columnaAtaque = Leer.datoInt();
-										
-										//TODO Finalizar comprobar distancia e incorporar método para comparar tirada de dados
-										
-										if (cB.comprobarDistancia(filaAct, columnaAct, filaAtaque, columnaAtaque) == true) {
+										if (quiereSalir == 0) {
+											System.out.println("Indique la tropa con la que desea atacar");
 											
-											cB.comprobarBatalla(filaAct, columnaAct, dB.getCasilla(), filaAtaque, columnaAtaque);
+											System.out.println("Fila");
+											filaAct = Leer.datoInt();
 											
-											//método para comparar las tiradas (donde se ejecutarán las tiradas
+											System.out.println("Columna");
+											columnaAct = Leer.datoInt();
 											
+											System.out.println("Indique el terreno o casilla a atacar");
+											
+											System.out.println("Fila");
+											filaAtaque = Leer.datoInt();
+											
+											System.out.println("Columna");
+											columnaAtaque = Leer.datoInt();
+											
+											//TODO Finalizar comprobar distancia e incorporar método para comparar tirada de dados
+											
+											if (cB.comprobarDistancia(filaAct, columnaAct, filaAtaque, columnaAtaque) == true && dB.getCasilla()[filaAct-1][columnaAct-1].getEquipo().equals(turnoActivo)) {
+												
+												cB.conquistarTerreno(cB.comprobarBatalla(filaAct, columnaAct, dB.getCasilla(), filaAtaque, columnaAtaque), filaAct, columnaAct, dB.getCasilla(), filaAtaque, columnaAtaque);
+												
+												atqFin = true;
+												//método para comparar las tiradas (donde se ejecutarán las tiradas
+												
+											} else {
+												System.out.println("Las tropas no pueden efectuar el ataque porque el enemigo está demasiado lejos o porque quizás te has confundido de equipo :/");
+											}
 										} else {
-											System.out.println("Las tropas están demasiado lejos");
+											atqFin = true;
 										}
-									} while (cB.comprobarDistancia(filaAct, columnaAct, filaAtaque, columnaAtaque) != true);
+									} while (atqFin != true);
 									
 									break;
 								
@@ -228,8 +247,15 @@ public class Principal {
 							
 						} while (optC != 3);
 					
-					} while (!cP.comprobarGanador(b.getCasilla()));
+					} while (!cP.comprobarFinal(b.getCasilla()));
+					
+					System.out.println("Se ha acabado la partida");
+					
+					System.out.println(cP.comprobarGanador(b.getCasilla()));
+					
+					opt = cero;
 					break;
+					
 				case 2:
 					
 					m.imprimirMenuReglas();
@@ -267,8 +293,8 @@ public class Principal {
 					break;
 					
 				case 3:
-					
-					m.imprimirMenuCreditos();
+					cP.comprobarGanador(dB.getCasilla());
+					//m.imprimirMenuCreditos();
 					
 					break;
 		

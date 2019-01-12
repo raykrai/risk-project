@@ -30,18 +30,21 @@ public class ControllerPartida {
 	}
 	
 	//Comprueba si se ha acabado la partida
-	public boolean comprobarGanador(Terrain casilla[][]) {
+	public boolean comprobarFinal(Terrain casilla[][]) {
 		boolean isFinished = false;
 		int cero = 0;
-		int contA = 0;
+		int uno = 1;
+		int veinticinco = 25;
+		int contB = 0;
 		int contR = 0;
+		int contT = 0;
 		
 		for (int i = 0; i<casilla.length; i++) {
 			
 			for (int j = 0; j <casilla[i].length; j++) {
 				
 				if (casilla[i][j].getEquipo().equals("B")) {
-					contA++;
+					contB++;
 				}
 				
 				if (casilla[i][j].getEquipo().equals("R")){
@@ -50,11 +53,57 @@ public class ControllerPartida {
 			}
 		}
 		
-		if (contA == cero || contR == cero) {
+		for (int i = 0; i<casilla.length; i++) {
+			
+			for (int j = 0; j <casilla[i].length; j++) {
+				
+				if (casilla[i][j].getCanT() == uno) {
+					contT++;
+				}
+			}
+		}
+		
+		if (contB == cero || contR == cero) {
+			isFinished = true;
+		} else if (contT == veinticinco) {
 			isFinished = true;
 		}
 		
-		return isFinished;
+		return isFinished;	
+	}
+	
+	public String comprobarGanador(Terrain casilla[][]) {
 		
+		int uno = 1;
+		int veinticinco = 25;
+		int contB = 0;
+		int contR = 0;
+		int contT = 0;
+		
+		String ganador = "Empate";
+		
+		for (int i = 0; i<casilla.length; i++) {
+			
+			for (int j = 0; j <casilla[i].length; j++) {
+				
+				if (casilla[i][j].getEquipo().equals("B")) {
+					contB++;
+				}
+				
+				if (casilla[i][j].getEquipo().equals("R")){
+					contR++;
+				} 
+			}
+		}
+		
+		System.out.println("Terrenos del equipo blue:" +contB);
+		System.out.println("Terrenos del equipo red:" + contR);
+		if (contB > contR) {
+			ganador = "B";
+		} else if (contR > contB) {
+			ganador = "R";
+		}
+		
+		return ganador;
 	}
 }
