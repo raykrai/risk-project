@@ -5,9 +5,13 @@ import model.Terrain;
 
 public class ControllerPartida {
 	
+	//Constructor
+	
 	public ControllerPartida() {
 		
 	}
+	
+	//Coloca las tropas iniciales
 	
 	public Terrain[][] colocarTropas(String jugador, Terrain casilla[][], String tipo, int cantidad, int fila, int columna) {
 		
@@ -30,7 +34,9 @@ public class ControllerPartida {
 	}
 	
 	//Comprueba si se ha acabado la partida
+	
 	public boolean comprobarFinal(Terrain casilla[][]) {
+		
 		boolean isFinished = false;
 		int cero = 0;
 		int uno = 1;
@@ -72,13 +78,12 @@ public class ControllerPartida {
 		return isFinished;	
 	}
 	
+	//Comprueba el ganador
+	
 	public String comprobarGanador(Terrain casilla[][]) {
 		
-		int uno = 1;
-		int veinticinco = 25;
 		int contB = 0;
 		int contR = 0;
-		int contT = 0;
 		
 		String ganador = "Empate";
 		
@@ -96,12 +101,12 @@ public class ControllerPartida {
 			}
 		}
 		
-		System.out.println("Terrenos del equipo blue:" +contB);
-		System.out.println("Terrenos del equipo red:" + contR);
+		System.out.println("Terrenos del equipo Blue:" +contB);
+		System.out.println("Terrenos de la facción Red:" + contR);
 		if (contB > contR) {
-			ganador = "B";
+			ganador = "Blue";
 		} else if (contR > contB) {
-			ganador = "R";
+			ganador = "Red";
 		}
 		
 		return ganador;

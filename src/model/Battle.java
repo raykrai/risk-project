@@ -4,8 +4,6 @@ import java.util.Arrays;
 
 public class Battle {
 	
-	//TODO Determinar qué hacemos aquí
-	
 	//Atributos
 	
 	private Terrain casilla[][];

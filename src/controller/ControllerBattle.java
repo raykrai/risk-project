@@ -2,9 +2,7 @@ package controller;
 
 import java.util.Random;
 
-import data.DataPlayer;
 import model.Terrain;
-import model.Troop;
 
 
 public class ControllerBattle {
@@ -39,9 +37,11 @@ public class ControllerBattle {
 		
 		int cien =100;
 		int cero=0;
+		int uno = 1;
+		int dos = 2;
 		int tirada=0;
 		
-			if(casilla[filaAct-1][columnaAct-1].getTipo().equals("A")){
+			if(casilla[filaAct-uno][columnaAct-uno].getTipo().equals("A")){
 				
 				if(casilla[filaAtaque-1][columnaAtaque-1].getT().getTipo().equals("Inf")) {
 					tirada=tirarDadox1()*cien;
@@ -49,11 +49,11 @@ public class ControllerBattle {
 					tirada=tirarDadox1()*cero;
 				}
 				
-				}else if(comprobarTerreno(casilla,filaAct,columnaAct)==2 && casilla[filaAct-1][columnaAct-1].getCanT() > casilla[filaAtaque-1][columnaAtaque-1].getCanT()) {
+				}else if(comprobarTerreno(casilla,filaAct,columnaAct)==dos && casilla[filaAct-uno][columnaAct-uno].getCanT() > casilla[filaAtaque-uno][columnaAtaque-uno].getCanT()) {
 				
 					tirada=tirarDadox3();
 				
-				}else if(comprobarTerreno(casilla,filaAct,columnaAct)==2) {
+				}else if(comprobarTerreno(casilla,filaAct,columnaAct)==dos) {
 					
 					tirada=tirarDadox2();
 					
@@ -69,7 +69,7 @@ public class ControllerBattle {
 	
 	public int defender(int filaAct, int columnaAct, Terrain casilla[][], int filaAtaque, int columnaAtaque) {
 		
-		int tiradaD=0, cien=100, cero=0;
+		int tiradaD=0, cien=100, cero=0, uno = 1, dos = 2;
 		
 		if(casilla[filaAtaque-1][columnaAtaque-1].getTipo().equals("A")) {
 			
@@ -78,10 +78,10 @@ public class ControllerBattle {
 			}else {
 				tiradaD=tirarDadox1()*cero;
 			}
-		}else if(comprobarTerreno(casilla,filaAtaque,columnaAtaque)==2 && casilla[filaAtaque-1][columnaAtaque-1].getCanT() > casilla[filaAtaque-1][columnaAct-1].getCanT()) {
+		}else if(comprobarTerreno(casilla,filaAtaque,columnaAtaque)==dos && casilla[filaAtaque-uno][columnaAtaque-uno].getCanT() > casilla[filaAtaque-uno][columnaAct-uno].getCanT()) {
 				tiradaD=tirarDadox3();
 					
-		}else if(comprobarTerreno(casilla,filaAtaque,columnaAtaque)==2) {
+		}else if(comprobarTerreno(casilla,filaAtaque,columnaAtaque)==dos) {
 			
 			tiradaD=tirarDadox2();
 			
@@ -161,10 +161,9 @@ public class ControllerBattle {
 			
 			for (int j = 0; j <casilla[i].length; j++) {
 		
-		if(casilla[filaAct-uno][columnaAct-uno].getT().getTipo().equals("Inf") && casilla[filaAct-uno][columnaAct-uno].getTipo().equals("M") || (casilla[filaAct-uno][columnaAct-uno].getT().getTipo().equals("Cab") && casilla[filaAct-uno][columnaAct-uno].getTipo().equals("L"))) {
-			vent=2;
-		}
-		
+				if(casilla[filaAct-uno][columnaAct-uno].getT().getTipo().equals("Inf") && casilla[filaAct-uno][columnaAct-uno].getTipo().equals("M") || (casilla[filaAct-uno][columnaAct-uno].getT().getTipo().equals("Cab") && casilla[filaAct-uno][columnaAct-uno].getTipo().equals("L"))) {
+					vent=2;
+				}
 		
 			}
 		}
@@ -286,6 +285,8 @@ public class ControllerBattle {
 		//Se definen variables necesarias
 		
 		int uno=1;
+		int cero = 0;
+		int cuatro = 4;
 		
 		boolean hasMoved = false;
 		
@@ -297,7 +298,7 @@ public class ControllerBattle {
 		//Aquí empieza la fiesta :^)
 		
 		//Condicional para controlar que no se quede ningún terreno vacío
-		if (casilla[filaAct][columnaAct].getCanT()-cantidad <1){
+		if (casilla[filaAct][columnaAct].getCanT()-cantidad <uno){
 			
 			System.out.println("¡No puedes dejar tu terreno vacío!");
 			
@@ -305,7 +306,7 @@ public class ControllerBattle {
 			
 		//Cada if de aquí dentro controla los límites (esquinas, laterales e interiores)
 			
-			if ( filaAct == 0 && columnaAct == 0) { //Esquina superior izquierda
+			if ( filaAct == cero && columnaAct == cero) { //Esquina superior izquierda
 				
 				switch (ladoMov) {
 				
@@ -328,7 +329,7 @@ public class ControllerBattle {
 						break;
 				}
 				
-			} else if ( filaAct == 0 && columnaAct == 4){ //Esquina superior derecha
+			} else if ( filaAct == cero && columnaAct == cuatro){ //Esquina superior derecha
 				
 				switch (ladoMov) {
 				
@@ -352,7 +353,7 @@ public class ControllerBattle {
 					break;
 					
 				}
-			} else if (filaAct == 0 ) { //Lateral superior
+			} else if (filaAct == cero ) { //Lateral superior
 				
 				switch (ladoMov) {
 				
@@ -380,7 +381,7 @@ public class ControllerBattle {
 						
 						break;
 				}
-			} else if ( filaAct == 4 && columnaAct == 4){ //Esquina inferior derecha
+			} else if ( filaAct == cuatro && columnaAct == cuatro){ //Esquina inferior derecha
 				
 				switch (ladoMov) {
 
@@ -403,7 +404,7 @@ public class ControllerBattle {
 						break;
 						
 				}
-			} else if (filaAct == 4 && columnaAct == 0) { //Esquina inferior izquierda
+			} else if (filaAct == cuatro && columnaAct == cero) { //Esquina inferior izquierda
 				
 				switch (ladoMov) {
 					
@@ -425,7 +426,7 @@ public class ControllerBattle {
 						break;
 						
 				}
-			} else if (columnaAct == 0){ //Lateral Izquierdo
+			} else if (columnaAct == cero){ //Lateral Izquierdo
 				
 				switch (ladoMov) {
 				
@@ -452,7 +453,7 @@ public class ControllerBattle {
 						break;
 						
 				}
-			} else if (columnaAct == 4) { //Lateral Derecho
+			} else if (columnaAct == cuatro) { //Lateral Derecho
 				
 				switch (ladoMov) {
 				
@@ -478,7 +479,7 @@ public class ControllerBattle {
 						System.out.println("Opción no válida");
 						break;
 				}	
-			} else if (filaAct == 4) { //Lateral inferior
+			} else if (filaAct == cuatro) { //Lateral inferior
 				
 				switch (ladoMov) {
 				

@@ -5,7 +5,6 @@ import controller.ControllerBattle;
 import data.DataBattle;
 import data.DataPlayer;
 import model.Battle;
-import model.Terrain;
 import utilidades.Leer;
 import view.Mapa;
 import view.Menu;
@@ -13,10 +12,15 @@ import view.Menu;
 public class Principal {
 
 	public static void main(String[] args) {
-		int turno = 2, opt, cero = 0, optC, filaAct=0, columnaAct=0, filaAtaque=0, columnaAtaque=0, ladoMov=0, cantidad, uno=1, quiereSalir;
+		
+		//Variables (turno y turnoActivo para controlar el paso de los turnos) (movFin y atqFin para controlar la salida de los menús) (el resto para controlar posiciones y opciones)
+		
+		int turno = 2, opt, cero = 0, optC, filaAct=0, columnaAct=0, filaAtaque=0, columnaAtaque=0, ladoMov=0, cantidad, uno=1, dos=2, tres=3, quiereSalir;
 		boolean movFin, atqFin;
 		String turnoActivo = "R";
 		String tipo;
+		
+		//Se inicializan la base de datos, el mapa de la batalla, el menú y los controladores
 		
 		DataBattle dB = new DataBattle();
 		Battle b = new Battle(dB.getCasilla());
@@ -27,11 +31,13 @@ public class Principal {
 		ControllerPartida cP = new ControllerPartida();
 		
 		//Se muestra el menú
+		
 		m.imprimirMenuBienv();
 		
 		do {
 		
 			//Se muestra el menú y se lee la opción deseada
+			
 			m.imprimirMenuPrincipal();
 			
 			opt = Leer.datoInt();
@@ -44,10 +50,14 @@ public class Principal {
 					
 				case 1:
 					
+					//Comienza la fase de inicio donde cada jugador elige donde colocar sus tropas
+					
 					m.imprimirComienzoPartida();
-					System.out.println("Primero elegirá las posiciones el jugador Red (R)\n");
+					System.out.println("Primero elegirá las posiciones iniciales el jugador Red (R)\n");
 					
 					do {
+						
+						//Fase de Inicio del jugador Red
 						
 						map.imprimirMapa(b);
 						
@@ -58,6 +68,8 @@ public class Principal {
 							System.out.println("Inf o Cab");
 							
 							tipo = Leer.dato();
+							
+							//Se controla excepción o error tipográfico 
 							
 							if (!tipo.equals("Inf") && !tipo.equals("Cab")) {
 								System.out.println("Elige un tipo de tropa existente");
@@ -76,9 +88,11 @@ public class Principal {
 						
 						columnaAct = Leer.datoInt();
 						
-						if (cantidad <= DataPlayer.getArrayJugadores()[0].getCanT()) {
+						//Se controla el número de tropas que tiene el jugador aún por colocar, si es que tiene
+						
+						if (cantidad <= DataPlayer.getArrayJugadores()[cero].getCanT()) {
 							
-							cP.colocarTropas(DataPlayer.getArrayJugadores()[0].getEquipo(), b.getCasilla(), tipo, cantidad, filaAct, columnaAct);
+							cP.colocarTropas(DataPlayer.getArrayJugadores()[cero].getEquipo(), b.getCasilla(), tipo, cantidad, filaAct, columnaAct);
 							
 						} else {
 							
@@ -86,7 +100,9 @@ public class Principal {
 							
 						}
 						
-					} while (DataPlayer.getArrayJugadores()[0].getCanT() != 0);
+					} while (DataPlayer.getArrayJugadores()[cero].getCanT() != cero);
+					
+					//Comienza la fase de inicio del jugador Blue (igual que la del Red)
 					
 					System.out.println("Ahora el jugador Blue (B)");
 					
@@ -94,7 +110,7 @@ public class Principal {
 						
 						map.imprimirMapa(b);
 						
-						System.out.println("Te quedan "+DataPlayer.getArrayJugadores()[1].getCanT()+" tropas");
+						System.out.println("Te quedan "+DataPlayer.getArrayJugadores()[uno].getCanT()+" tropas");
 						System.out.println("Elige el tipo de tropa a colocar:");
 						System.out.println("Inf o Cab");
 						
@@ -112,9 +128,9 @@ public class Principal {
 						
 						columnaAct = Leer.datoInt();
 						
-						if (cantidad <= DataPlayer.getArrayJugadores()[1].getCanT()) {
+						if (cantidad <= DataPlayer.getArrayJugadores()[uno].getCanT()) {
 							
-							cP.colocarTropas(DataPlayer.getArrayJugadores()[1].getEquipo(), b.getCasilla(), tipo, cantidad, filaAct, columnaAct);
+							cP.colocarTropas(DataPlayer.getArrayJugadores()[uno].getEquipo(), b.getCasilla(), tipo, cantidad, filaAct, columnaAct);
 							
 						} else {
 							
@@ -122,9 +138,15 @@ public class Principal {
 							
 						}
 						
-					} while (DataPlayer.getArrayJugadores()[1].getCanT() != 0);
-
+					} while (DataPlayer.getArrayJugadores()[uno].getCanT() != 0);
+					
+					//Comienza la partida como tal
+					
+					//El primer do{} while() hace que la partida siga hasta que se reunan las condiciones necesarias como para que haya un empate o un ganador
+					
 					do {
+						
+						//Este controla el turno de cada jugador con las variables turnoActivo y turno
 						
 						do {
 							
@@ -140,14 +162,15 @@ public class Principal {
 									
 									movFin = false;
 									
-									do {
-										//TODO Meter condicional para pasar turno  
+									//Esto controla si el usuario quiere pasar turno porque se ha arrepentido de la opción escogida o si ha acabado el movimiento
+									
+									do { 
 										
 										System.out.println("Si deseas mover una tropa aliada a una posición aliada pulsa 0. Sin embargo, si no hay posición disponible, tendrás que pasar turno pulsando cualquier otro número.");
 										
 										quiereSalir = Leer.datoInt();
 
-										if (quiereSalir == 0) {
+										if (quiereSalir == cero) {
 											
 											
 											System.out.println("Indique la tropa que desea movilizar:");
@@ -156,7 +179,7 @@ public class Principal {
 											System.out.println("Columna");
 											columnaAct=Leer.datoInt();
 											
-											if (!dB.getCasilla()[filaAct-1][columnaAct-1].getEquipo().equals(turnoActivo) ) {
+											if (!dB.getCasilla()[filaAct-uno][columnaAct-uno].getEquipo().equals(turnoActivo) ) {
 												
 												System.out.println("Esas tropas no son tuyas");
 												
@@ -171,8 +194,10 @@ public class Principal {
 											
 											
 										} else {
+											
 											movFin = true;
 										}
+										
 									} while (!movFin);
 									
 									break;
@@ -181,13 +206,15 @@ public class Principal {
 									
 									atqFin = false;
 									
+									//Se controla si el ataque se ha realizado o si el usuario se ha arrepentido y prefiere pasar turno
+									
 									do {
 										
 										System.out.println("Si deseas realizar un ataque pulsa 0. Sin embargo, si prefieres/tienes que pasar turno pulsa cualquier otro número.");
 										
 										quiereSalir = Leer.datoInt();
 										
-										if (quiereSalir == 0) {
+										if (quiereSalir == cero) {
 											System.out.println("Indique la tropa con la que desea atacar");
 											
 											System.out.println("Fila");
@@ -204,50 +231,55 @@ public class Principal {
 											System.out.println("Columna");
 											columnaAtaque = Leer.datoInt();
 											
-											//TODO Finalizar comprobar distancia e incorporar método para comparar tirada de dados
+											//Se comprueba la distancia de la casilla y si hay luz verde y las tropas elegidas para atacar son de tu equipo se llama a conquistarTerreno 
+											//que llama a comprobarBatalla que saca si el atacante ha ganado o no y a su vez se modifica el campo de batalla según los resultados
 											
 											if (cB.comprobarDistancia(filaAct, columnaAct, filaAtaque, columnaAtaque) == true && dB.getCasilla()[filaAct-1][columnaAct-1].getEquipo().equals(turnoActivo)) {
 												
 												cB.conquistarTerreno(cB.comprobarBatalla(filaAct, columnaAct, dB.getCasilla(), filaAtaque, columnaAtaque), filaAct, columnaAct, dB.getCasilla(), filaAtaque, columnaAtaque);
 												
 												atqFin = true;
-												//método para comparar las tiradas (donde se ejecutarán las tiradas
 												
 											} else {
 												System.out.println("Las tropas no pueden efectuar el ataque porque el enemigo está demasiado lejos o porque quizás te has confundido de equipo :/");
 											}
+											
 										} else {
 											atqFin = true;
 										}
+										
 									} while (atqFin != true);
 									
 									break;
 								
 								case 3:
+									//Pasas turno
 									
 									break;
 									
 								default:
-								
+									//Se controlan excepciones
+									
 									System.out.println("¡Introduce una acción válida!");
 								
 									break;
 							}
 							
-							//TODO Aquí controlo los turnos
-							if (turno%2 == cero) {
+							// Aquí controlo los turnos con la regla de, un turno yo, un turno tú.
+							
+							if (turno%dos == cero) {
 								turnoActivo = "B";
-								//System.out.println(turnoActivo);
 							} else {
 								turnoActivo = "R";
-								//System.out.println(turnoActivo);
 							}
 							
 							turno++;
 							
-						} while (optC != 3);
+						} while (optC != tres);
 					
 					} while (!cP.comprobarFinal(b.getCasilla()));
+					
+					//Se muestra el resultado final de la partida y acaba el programa (para volver a jugar, hay que ejecutar de nuevo)
 					
 					System.out.println("Se ha acabado la partida");
 					
@@ -258,48 +290,22 @@ public class Principal {
 					
 				case 2:
 					
+					//Se imprime el menú de las reglas
+					
 					m.imprimirMenuReglas();
-					
-					//TODO Testeando comprobar distancia, NO BORRAR POR FAVOR
-					
-					/*map.imprimirMapa(b);
-					
-					do {
-						
-						System.out.println("Indique la tropa con la que desea atacar");
-						
-						System.out.println("Fila");
-						filaAct = Leer.datoInt();
-						
-						System.out.println("Columna");
-						columnaAct = Leer.datoInt();
-						
-						System.out.println("Indique el terreno o casilla a atacar");
-						
-						System.out.println("Fila");
-						filaAtaque = Leer.datoInt();
-						
-						System.out.println("Columna");
-						columnaAtaque = Leer.datoInt();
-						
-						if (cB.comprobarDistancia(filaAct, columnaAct, filaAtaque, columnaAtaque) == true) {
-							System.out.println("Las tropas están al lado");
-						} else {
-							System.out.println("Las tropas están demasiado lejos");
-						}
-					} while (cB.comprobarDistancia(filaAct, columnaAct, filaAtaque, columnaAtaque) != true);
-					*/
 					
 					break;
 					
 				case 3:
-					cP.comprobarGanador(dB.getCasilla());
-					//m.imprimirMenuCreditos();
+					
+					//Se imprime el menú de los créditos
+					
+					m.imprimirMenuCreditos();
 					
 					break;
 		
 				} 
-		} while (opt !=0);
+		} while (opt !=cero);
 	}
 
 }

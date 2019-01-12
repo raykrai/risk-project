@@ -7,6 +7,8 @@ public class Menu {
 		// TODO Auto-generated constructor stub
 	}
 
+//La mayoría de los métodos de aquí se puede ver qué hacen sólo con leer el nombre
+	
 	public void imprimirMenuBienv() {
 		
 		System.out.println("\r\n" + 
@@ -25,12 +27,9 @@ public class Menu {
 				"\t \t \t \t \t                                                (%%%%%%%%%%%%%#. (%%%%%%%%##%%#%*,(#%%%%%%#,/%%%%%%#*     ,#%%%&&&*  (&&%%&&%%%&/   (%%%%%%%%%%%#. \r\n" + 
 				"\t \t \t \t \t                                                (##############. *(###########%%*,(#%#%#%#(,/#%####%#%%##(########* .(%%%%%%%%%%/   (%#%%#######(. \r\n" + 
 				"\t \t \t \t \t                                                (##############.   *((##(###((##**(#######(,/(########%###%%%#(/.   .(##########/     (####((##(##(. ");
-		
-		System.out.println("\n\n");
-		
-		
-		
-		
+		System.out.println("");
+		System.out.println("\t \t \t \t \t                                                                                      '2000 IQ Required'");
+		System.out.println("\n\n");	
 	}
 	
 	public void imprimirMenuPrincipal() {
@@ -63,7 +62,7 @@ public class Menu {
 	}
 	
 	public void imprimirMenuCreditos() {
-		System.out.println("Realizado por: José María, Juan Antonio, Lucas y Gonzalo");
+		System.out.println("Realizado por: \n\n - José María. (IG: @raykrai | Twitch: /raykrai)\n - Juan Antonio.\n - Lucas.\n");
 	}
 	
 	public void imprimirComienzoPartida() {
@@ -80,58 +79,37 @@ public class Menu {
 	
 	public void imprimirMenuReglas() {
 		
-		System.out.println("\n\t \t \t \t \t                       `7MM\"\"\"Mq.  `7MM\"\"\"YMM    .g8\"\"\"bgd  `7MMF'            db       .M\"\"\"bgd \r\n" + 
-				"\t \t \t \t \t                         MM   `MM.   MM    `7  .dP'     `M    MM             ;MM:     ,MI    \"Y \r\n" + 
-				"\t \t \t \t \t                         MM   ,M9    MM   d    dM'       `    MM            ,V^MM.    `MMb.     \r\n" + 
-				"\t \t \t \t \t                         MMmmdM9     MMmmMM    MM             MM           ,M  `MM      `YMMNq. \r\n" + 
-				"\t \t \t \t \t                         MM  YM.     MM   Y  , MM.    `7MMF'  MM      ,    AbmmmqMA   .     `MM \r\n" + 
-				"\t \t \t \t \t                         MM   `Mb.   MM     ,M `Mb.     MM    MM     ,M   A'     VML  Mb     dM \r\n" + 
-				"\t \t \t \t \t                       .JMML. .JMM..JMMmmmmMMM   `\"bmmmdPY  .JMMmmmmMMM .AMA.   .AMMA.P\"Ybmmd\"  \r\n" + 
-				"                                                                         ");
+		System.out.println("\n\t \t \t \t \t                                                 `7MM\"\"\"Mq.  `7MM\"\"\"YMM    .g8\"\"\"bgd  `7MMF'            db       .M\"\"\"bgd \r\n" + 
+				"\t \t \t \t \t                                                   MM   `MM.   MM    `7  .dP'     `M    MM             ;MM:     ,MI    \"Y \r\n" + 
+				"\t \t \t \t \t                                                   MM   ,M9    MM   d    dM'       `    MM            ,V^MM.    `MMb.     \r\n" + 
+				"\t \t \t \t \t                                                   MMmmdM9     MMmmMM    MM             MM           ,M  `MM      `YMMNq. \r\n" + 
+				"\t \t \t \t \t                                                   MM  YM.     MM   Y  , MM.    `7MMF'  MM      ,    AbmmmqMA   .     `MM \r\n" + 
+				"\t \t \t \t \t                                                   MM   `Mb.   MM     ,M `Mb.     MM    MM     ,M   A'     VML  Mb     dM \r\n" + 
+				"\t \t \t \t \t                                                 .JMML. .JMM..JMMmmmmMMM   `\"bmmmdPY  .JMMmmmmMMM .AMA.   .AMMA.P\"Ybmmd\"  \r\n" + 
+				"                                                                         \n\n");
 
-		System.out.println("  _                                                             _                        _                _                                      _                 _                   _                 \r\n" + 
-				" / |           __ _    __ _   _ __     __ _      __ _   _   _  (_)   ___   _ __       __| |   ___   ___  | |_   _ __   _   _   _   _    __ _    | |_    ___     __| |   __ _   ___    | |   __ _   ___   \r\n" + 
-				" | |  _____   / _` |  / _` | | '_ \\   / _` |    / _` | | | | | | |  / _ \\ | '_ \\     / _` |  / _ \\ / __| | __| | '__| | | | | | | | |  / _` |   | __|  / _ \\   / _` |  / _` | / __|   | |  / _` | / __|  \r\n" + 
-				" | | |_____| | (_| | | (_| | | | | | | (_| |   | (_| | | |_| | | | |  __/ | | | |   | (_| | |  __/ \\__ \\ | |_  | |    | |_| | | |_| | | (_| |   | |_  | (_) | | (_| | | (_| | \\__ \\   | | | (_| | \\__ \\  \r\n" + 
-				" |_|          \\__, |  \\__,_| |_| |_|  \\__,_|    \\__, |  \\__,_| |_|  \\___| |_| |_|    \\__,_|  \\___| |___/  \\__| |_|     \\__,_|  \\__, |  \\__,_|    \\__|  \\___/   \\__,_|  \\__,_| |___/   |_|  \\__,_| |___/  \r\n" + 
-				"              |___/                                |_|                                                                         |___/                                                                     "
-				+ "\n\t      _                                                                              _                       \r\n" + 
-				"\t     | |_   _ __    ___    _ __     __ _   ___      ___   _ __     ___   _ __ ___   (_)   __ _    __ _   ___ \r\n" + 
-				"\t     | __| | '__|  / _ \\  | '_ \\   / _` | / __|    / _ \\ | '_ \\   / _ \\ | '_ ` _ \\  | |  / _` |  / _` | / __|\r\n" + 
-				"\t     | |_  | |    | (_) | | |_) | | (_| | \\__ \\   |  __/ | | | | |  __/ | | | | | | | | | (_| | | (_| | \\__ \\\r\n" + 
-				"\t      \\__| |_|     \\___/  | .__/   \\__,_| |___/    \\___| |_| |_|  \\___| |_| |_| |_| |_|  \\__, |  \\__,_| |___/\r\n" + 
-				" \t                         |_|                                                            |___/               ");
-		System.out.println("  ____            ____    _                                       _                   _    ___      _                                                              _                                                     _           \r\n" + 
-				" |___ \\          / ___|  (_)    _ __     __ _   ___    __ _    __| |   ___    ___    / |  / _ \\    | |_   _   _   _ __   _ __     ___    ___     _ __     ___     | |__     __ _      __ _    __ _   _ __     __ _    __| |   ___    \r\n" + 
-				"   __) |  _____  \\___ \\  | |   | '_ \\   / _` | / __|  / _` |  / _` |  / _ \\  / __|   | | | | | |   | __| | | | | | '__| | '_ \\   / _ \\  / __|   | '_ \\   / _ \\    | '_ \\   / _` |    / _` |  / _` | | '_ \\   / _` |  / _` |  / _ \\   \r\n" + 
-				"  / __/  |_____|  ___) | | |   | |_) | | (_| | \\__ \\ | (_| | | (_| | | (_) | \\__ \\   | | | |_| |   | |_  | |_| | | |    | | | | | (_) | \\__ \\   | | | | | (_) |   | | | | | (_| |   | (_| | | (_| | | | | | | (_| | | (_| | | (_) |  \r\n" + 
-				" |_____|         |____/  |_|   | .__/   \\__,_| |___/  \\__,_|  \\__,_|  \\___/  |___/   |_|  \\___/     \\__|  \\__,_| |_|    |_| |_|  \\___/  |___/   |_| |_|  \\___/    |_| |_|  \\__,_|    \\__, |  \\__,_| |_| |_|  \\__,_|  \\__,_|  \\___/   \r\n" + 
-				"                               |_|                                                                                                                                                   |___/                                          "
-				+ "\n\t                          _   _                                                         _                                                          _                                      _                                  \r\n" + 
-				"\t       _ __     __ _    __| | (_)   ___          __ _    __ _   _ __     __ _      ___  | |     __ _   _   _    ___     _ __ ___     __ _   ___    | |_   _ __    ___    _ __     __ _    | |_    ___   _ __     __ _    __ _ \r\n" + 
-				"\t      | '_ \\   / _` |  / _` | | |  / _ \\        / _` |  / _` | | '_ \\   / _` |    / _ \\ | |    / _` | | | | |  / _ \\   | '_ ` _ \\   / _` | / __|   | __| | '__|  / _ \\  | '_ \\   / _` |   | __|  / _ \\ | '_ \\   / _` |  / _` |\r\n" + 
-				"\t      | | | | | (_| | | (_| | | | |  __/  _    | (_| | | (_| | | | | | | (_| |   |  __/ | |   | (_| | | |_| | |  __/   | | | | | | | (_| | \\__ \\   | |_  | |    | (_) | | |_) | | (_| |   | |_  |  __/ | | | | | (_| | | (_| |\r\n" + 
-				"\t      |_| |_|  \\__,_|  \\__,_| |_|  \\___| ( )    \\__, |  \\__,_| |_| |_|  \\__,_|    \\___| |_|    \\__, |  \\__,_|  \\___|   |_| |_| |_|  \\__,_| |___/    \\__| |_|     \\___/  | .__/   \\__,_|    \\__|  \\___| |_| |_|  \\__, |  \\__,_|\r\n" + 
-				"\t                                         |/     |___/                                             |_|                                                                   |_|                                     |___/         ");
-		
-		System.out.println("  _____           ____            _                                                       _                                                                            _                                        \r\n" + 
-				" |___ /          / ___|    ___   | |   ___      ___    ___     _ __    _   _    ___    __| |   ___   _ __       __ _    __ _   _ __   _   _   _ __     __ _   _ __    | |_   _ __    ___    _ __     __ _   ___ \r\n" + 
-				"   |_ \\   _____  \\___ \\   / _ \\  | |  / _ \\    / __|  / _ \\   | '_ \\  | | | |  / _ \\  / _` |  / _ \\ | '_ \\     / _` |  / _` | | '__| | | | | | '_ \\   / _` | | '__|   | __| | '__|  / _ \\  | '_ \\   / _` | / __|\r\n" + 
-				"  ___) | |_____|  ___) | | (_) | | | | (_) |   \\__ \\ |  __/   | |_) | | |_| | |  __/ | (_| | |  __/ | | | |   | (_| | | (_| | | |    | |_| | | |_) | | (_| | | |      | |_  | |    | (_) | | |_) | | (_| | \\__ \\\r\n" + 
-				" |____/          |____/   \\___/  |_|  \\___/    |___/  \\___|   | .__/   \\__,_|  \\___|  \\__,_|  \\___| |_| |_|    \\__,_|  \\__, | |_|     \\__,_| | .__/   \\__,_| |_|       \\__| |_|     \\___/  | .__/   \\__,_| |___/\r\n" + 
-				"                                                              |_|                                                      |___/                 |_|                                           |_|                  "
-				+ "\n\t            _          _                 _                               _     _                 \r\n" + 
-				"\t         __| |   ___  | |    _ __ ___   (_)  ___   _ __ ___     ___     | |_  (_)  _ __     ___  \r\n" + 
-				"\t        / _` |  / _ \\ | |   | '_ ` _ \\  | | / __| | '_ ` _ \\   / _ \\    | __| | | | '_ \\   / _ \\ \r\n" + 
-				"\t       | (_| | |  __/ | |   | | | | | | | | \\__ \\ | | | | | | | (_) |   | |_  | | | |_) | | (_) |\r\n" + 
-				"\t        \\__,_|  \\___| |_|   |_| |_| |_| |_| |___/ |_| |_| |_|  \\___/     \\__| |_| | .__/   \\___/ \r\n" + 
-				"\t                                                                                  |_|            ");
-		
-	}
-	
-	public void imprimirInicioPartida() {
-		System.out.println("Lo primero es lo primero... hay dos facciones: Roja y Azul, elegid a suerte quién es quién y pulsad 1 cua");
+		System.out.println("1. El juego tiene dos facciones o bandos. Cada jugador pertenecerá a una.\n");
+		System.out.println("2. El combate es letal. Si atacas y ganas, el defensor perderá su terreno y las tropas. Si atacas y pierdes, perderás todas las tropas con las que hayas atacado a excepción de una que servirá como guarnicón en la casilla en \n   la que te encontrabas.\n");
+		System.out.println("3. La distancia de interacción entre tropas es de una casilla. Por lo que no podrás mover tropas o atacar si están a más de una casilla.\n");
+		System.out.println("6. Si eliges tanto atacar como mover tropas y dentro del menú te arrepientes o te das cuenta de que no puedes realizar esa acción, tu única opción será pasar turno.\n");
+		System.out.println("5. Es obligatorio que haya 1 tropa defensora en cada terreno.\n");
+		System.out.println("En cuanto al movimiento de tropas: \n"+
+				"\n     - Sólo se puede usar esta opción para mover tropas entre terrenos aliados."+
+				"\n     - Para mover tropas tienen que ser del mismo tipo. Así que no despliegues caballería en una esquina, rodeada de infantería aliada, porque no la podrás sacar de ahí más que haciendo fuego amigo (atacando)."+
+				"\n     - Como excepción de terreno, existe la Artillería que durante el inicio de la partida es neutral, por lo que el movimiento hacia ella (de seguir neutral) será válido.\n");
+		System.out.println("En cuanto al ataque...\n");
+		System.out.println("     - Si atacas y ganas, tus tropas avanzaran a la posición atacada y como recompensa, se creará una nueva tropa en la posición anterior.");
+		System.out.println("     - El fuego amigo está activado.");
+		System.out.println("     - Existen ventajas en cuanto a las tropas y terrenos, véanse:\n");
+		System.out.println("              · Terreno M (Montaña): La infantería tendrá más ventaja si ataca desde este terreno.");
+		System.out.println("              · Terreno L (Llanura): La caballería tendrá más ventaja si ataca desde este terreno.");
+		System.out.println("              · Terreno A (Artillería): Cualesquiera que sean tus tropas que se encuentren en este terreno tendrán un 100% de éxito en ataques contra infantería y un 0% de éxito en ataques que sean contra caballería.\n");
+		System.out.println("     - En cuanto a la probabilidad, se tirará un dado, dos o tres, en función de la ventaja. Si tienes ventaja suficiente como para que se tiren dos dados, te podrá salir un número del 1 al 12,\n       y si el otro no tiene ningún tipo de ventaja, saldrá como máximo un 6. Esto hace que la partida sea extrema y más interesante.\n");
+		System.out.println("En cuanto a la condición de victoria:\n");
+		System.out.println("    - El objetivo del juego es conquistar todo el mapa.");
+		System.out.println("    - Si los dos jugadores pierden sus tropas movibles (que no sean la guarnición necesaria de una tropa por terreno), ganará la persona que más terrenos tenga conquistados, y en caso de empate, será empate.");
 		System.out.println("");
+		
 	}
 	
 	public void imprimirMenuCombate() {
@@ -144,7 +122,7 @@ public class Menu {
 	
 	public void imprimirMenuMovimiento(int filaAct, int columnaAct) {
 		
-		int uno=1, dos=2, tres=3, cuatro=4, cinco=5;
+		int uno=1, cinco=5;
 		
 		System.out.println("¿Hacia dónde quieres mover las tropas?");
 		

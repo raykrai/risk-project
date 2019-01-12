@@ -4,19 +4,22 @@ import model.Battle;
 
 public class Mapa {
 	
-	
+	//Constructor
 	
 	public Mapa() {
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	//Se lee el terreno de juego y decoraciones
 	public void imprimirMapa(Battle b) {
+		
+		//Decoraciones / Leyenda
 		System.out.println("\n\n \t \t     M = Montaña  |  L = Llanura  |  A = Artillería  |  R = Jugador Red   |  B = Jugador Blue\n");
 		System.out.printf("                      --------------------------------------------------------------------------------------\n");
 		System.out.println("Fila ↓ / Columna →            1                2                3                4                5");
-		//System.out.println("\n \t Fila ⬇️");
 		System.out.println("                      --------------------------------------------------------------------------------------\n");
 		
+		//Bucle para leer el terreno
 		for (int i = 0; i < b.getCasilla().length; i++) {
 			
 			System.out.printf("  %d",i+1);
@@ -37,6 +40,7 @@ public class Mapa {
 			
 			System.out.println("\n \n ");
 		}
+		
 		System.out.println("                      --------------------------------------------------------------------------------------\n\n");
 	}
 
