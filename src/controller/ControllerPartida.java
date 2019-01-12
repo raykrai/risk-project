@@ -101,8 +101,8 @@ public class ControllerPartida {
 			}
 		}
 		
-		System.out.println("Terrenos del equipo Blue:" +contB);
-		System.out.println("Terrenos de la facción Red:" + contR);
+		System.out.println("Terrenos del equipo Blue: " +contB);
+		System.out.println("Terrenos de la facción Red: " + contR);
 		if (contB > contR) {
 			ganador = "Blue";
 		} else if (contR > contB) {

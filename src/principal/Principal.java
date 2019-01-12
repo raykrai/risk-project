@@ -16,7 +16,7 @@ public class Principal {
 		//Variables (turno y turnoActivo para controlar el paso de los turnos) (movFin y atqFin para controlar la salida de los menús) (el resto para controlar posiciones y opciones)
 		
 		int turno = 2, opt, cero = 0, optC, filaAct=0, columnaAct=0, filaAtaque=0, columnaAtaque=0, ladoMov=0, cantidad, uno=1, dos=2, tres=3, quiereSalir;
-		boolean movFin, atqFin;
+		boolean movFin, atqFin, atacanteGanador;
 		String turnoActivo = "R";
 		String tipo;
 		
@@ -236,7 +236,10 @@ public class Principal {
 											
 											if (cB.comprobarDistancia(filaAct, columnaAct, filaAtaque, columnaAtaque) == true && dB.getCasilla()[filaAct-1][columnaAct-1].getEquipo().equals(turnoActivo)) {
 												
-												cB.conquistarTerreno(cB.comprobarBatalla(filaAct, columnaAct, dB.getCasilla(), filaAtaque, columnaAtaque), filaAct, columnaAct, dB.getCasilla(), filaAtaque, columnaAtaque);
+												atacanteGanador = cB.comprobarBatalla(filaAct, columnaAct, dB.getCasilla(), filaAtaque, columnaAtaque);
+												cB.conquistarTerreno(atacanteGanador, filaAct, columnaAct, dB.getCasilla(), filaAtaque, columnaAtaque);
+												
+												m.imprimirGanadorAtaque(atacanteGanador, turno);
 												
 												atqFin = true;
 												
@@ -283,7 +286,7 @@ public class Principal {
 					
 					System.out.println("Se ha acabado la partida");
 					
-					System.out.println(cP.comprobarGanador(b.getCasilla()));
+					m.imprimirGanadorPartida(cP.comprobarGanador(b.getCasilla()));
 					
 					opt = cero;
 					break;
@@ -299,7 +302,6 @@ public class Principal {
 				case 3:
 					
 					//Se imprime el menú de los créditos
-					
 					m.imprimirMenuCreditos();
 					
 					break;

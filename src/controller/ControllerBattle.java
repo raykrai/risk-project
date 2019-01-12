@@ -102,10 +102,8 @@ public class ControllerBattle {
 		boolean atacanteGanador;
 		
 		if(atacar(filaAct, columnaAct, casilla, filaAtaque, columnaAtaque)>=defender(filaAct, columnaAct, casilla, filaAtaque, columnaAtaque)  ) {
-			System.out.println("El atacante ha ganado");
 			atacanteGanador=true;
 		}else {
-			System.out.println("El atacante ha perdido");
 			atacanteGanador=false;
 		}
 		
