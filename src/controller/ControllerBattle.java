@@ -103,7 +103,7 @@ public class ControllerBattle {
 		
 		if(atacar(filaAct, columnaAct, casilla, filaAtaque, columnaAtaque)>=defender(filaAct, columnaAct, casilla, filaAtaque, columnaAtaque)  ) {
 			atacanteGanador=true;
-		}else {
+		}else {   
 			atacanteGanador=false;
 		}
 		
@@ -135,6 +135,7 @@ public class ControllerBattle {
 			casilla[filaAct][columnaAct].setCanT(uno); 
 		}
 	}
+	
 //Método usado en el main para comprobar si la tropa a atacar está cerca o no
 	
 	public boolean comprobarDistancia(int filaAct, int columnaAct, int filaAtaque, int columnaAtaque) {
