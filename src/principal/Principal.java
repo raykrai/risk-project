@@ -13,19 +13,24 @@ import view.Menu;
  * Division de trabajo desglosado por partes:
  * 
  * -Clases POJO:
- * 	-Terreno:Juan Antonio Lago
+ *
+ * 	-Terreno: Juan Antonio Lago
  * 	-Jugador: Jose María Ruiz
- * 	-Tropas:Lucas Amado
- * 	-Battle:Jose María Ruiz
+ * 	-Tropas: Lucas Amado
+ * 	-Battle: Jose María Ruiz
  * 
  * -Data:
+ * 
  * 	-Data Battle: Jose María Ruiz
  * 	-Data Player: Juan Antonio Lago
  * 
  * -View:
- * 	-Mapa:
+ * 
+ * 	· Mapa:
+ * 
  * 		-Imprimir mapa: Lucas Amado.
- * 	-Menú:
+ * 
+ * 	· Menú:
  * 		-Imprimir menú bienvenda: Jose María Ruiz
  * 		-Imprimir menú principal: Juan Antonio Lago
  * 		-Imprimir menú reglas: Lucas Amado
@@ -46,12 +51,14 @@ import view.Menu;
  * 			-Método comprobar ganador: Lucas Amado
  * 
  * 	-Main:
- * 	-En el main hemos hecho el testeo de métodos y haciendo el control de bucles e impresiones todos, por lo tanto es
+ * 
+ * 	En el main hemos hecho el testeo de métodos y haciendo el control de bucles e impresiones todos, por lo tanto es
  * 	difícil dividirlo de forma equitativa, todos hemos participado en el main pero a la hora de estructurar el programa
  * 	la decisión final era del coordinador Jose María Ruiz, pero Juan Antonio Lago, Lucas Amado y Jose María Ruiz han 
  *  desarrollado el main.
  *  
  *  -Valoración: Jose María Ruiz
+ *  
  *   Yo, José María Ruiz Laguna, coordinador del proyecto redacto aquí mis impresiones:
  *
  *	 Creo que ha sido una experiencia buena en nuestro primer proyecto en el que realmente tocábamos código (porque el anterior eran dos sysos...).
@@ -61,7 +68,8 @@ import view.Menu;
  *	 Creo que nuestro trabajo ha quedado bastante bien, y refleja bastante la dificultad e intensidad del juego de mesa, pero obviamente, sin llegar a serlo completamente, ya que, simplemente con 3 opciones,
  *	 hemos podido llegar a redactar más de 20 líneas de reglas sólo incluyendo tres opciones/funcionalidades jugables. 
  *
- *	 Por ello no vimos conveniente, el más funcionalidades, pero no.
+ *	 Por ello no vimos conveniente, el añadir más funcionalidades, ya que pasaría de ser un juego, a una tortura (como leer el manual de una lavadora en polaco).
+ *	 En líneas generales, todos los miembros hemos estado implicados en el proyecto haciendo una función u otra (a excepción de Gonzalo).
  *  
  * 
  *  */
