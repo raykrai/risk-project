@@ -11,6 +11,19 @@ public class ControllerPartida {
 		
 	}
 	
+	//Método sleep
+	public void pararTiempo(int tiempo) throws InterruptedException {
+		Thread.sleep(tiempo);
+	}
+	
+	public void limpiar(int lineas){
+		
+		for (int i=0; i < lineas; i++){
+			System.out.println("");
+		}
+	}
+	
+	
 	//Coloca las tropas iniciales
 	
 	public Terrain[][] colocarTropas(String jugador, Terrain casilla[][], String tipo, int cantidad, int fila, int columna) {

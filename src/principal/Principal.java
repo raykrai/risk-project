@@ -11,11 +11,11 @@ import view.Menu;
 
 public class Principal {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		
 		//Variables (turno y turnoActivo para controlar el paso de los turnos) (movFin y atqFin para controlar la salida de los menús) (el resto para controlar posiciones y opciones)
 		
-		int turno = 2, opt, cero = 0, optC, filaAct=0, columnaAct=0, filaAtaque=0, columnaAtaque=0, ladoMov=0, cantidad, uno=1, dos=2, tres=3, quiereSalir;
+		int turno = 2, opt, cero = 0, optC, filaAct=0, columnaAct=0, filaAtaque=0, columnaAtaque=0, ladoMov=0, cantidad, uno=1, dos=2, tres=3, quiereSalir, tiempo=2500;
 		boolean movFin, atqFin, atacanteGanador;
 		String turnoActivo = "R";
 		String tipo;
@@ -31,13 +31,12 @@ public class Principal {
 		ControllerPartida cP = new ControllerPartida();
 		
 		//Se muestra el menú
-		
+		m.imprimirCarga();
 		m.imprimirMenuBienv();
 		
 		do {
 		
 			//Se muestra el menú y se lee la opción deseada
-			
 			m.imprimirMenuPrincipal();
 			
 			opt = Leer.datoInt();
@@ -236,6 +235,8 @@ public class Principal {
 											
 											if (cB.comprobarDistancia(filaAct, columnaAct, filaAtaque, columnaAtaque) == true && dB.getCasilla()[filaAct-1][columnaAct-1].getEquipo().equals(turnoActivo)) {
 												
+												System.out.println("Espere un segundo. Se está realizando la batalla");
+												cP.pararTiempo(tiempo);
 												atacanteGanador = cB.comprobarBatalla(filaAct, columnaAct, dB.getCasilla(), filaAtaque, columnaAtaque);
 												cB.conquistarTerreno(atacanteGanador, filaAct, columnaAct, dB.getCasilla(), filaAtaque, columnaAtaque);
 												
@@ -244,7 +245,7 @@ public class Principal {
 												atqFin = true;
 												
 											} else {
-												System.out.println("Las tropas no pueden efectuar el ataque porque el enemigo está demasiado lejos o porque quizás te has confundido de equipo :/");
+												System.out.println("Las tropas no pueden efectuar el ataque porque el enemigo está demasiado lejos o porque quizás te has confundido de equipo :/\n");
 											}
 											
 										} else {

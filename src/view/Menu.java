@@ -1,6 +1,10 @@
 package view;
 
+import controller.ControllerPartida;
+
 public class Menu {
+	
+	ControllerPartida cP = new ControllerPartida();
 	
 	public Menu() {
 		super();
@@ -8,6 +12,28 @@ public class Menu {
 	}
 
 //La mayoría de los métodos de aquí se puede ver qué hacen sólo con leer el nombre
+	
+	public void imprimirCarga() throws InterruptedException {
+		int tiempo=1500, lineas=59;
+		
+		System.out.print("\t \t \t                                                           ______    ___     ____    ______    ___     _   __    ____    ____    \r\n" + 
+				"\t \t \t                                                          / ____/   /   |   / __ \\  / ____/   /   |   / | / /   / __ \\  / __ \\   \r\n" + 
+				"\t \t \t                                                         / /       / /| |  / /_/ / / / __    / /| |  /  |/ /   / / / / / / / /   \r\n" + 
+				"\t \t \t                                                        / /___    / ___ | / _, _/ / /_/ /   / ___ | / /|  /   / /_/ / / /_/ /   \r\n" + 
+				"\t \t \t                                                        \\____/   /_/  |_|/_/ |_|  \\____/   /_/  |_|/_/ |_/   /_____/  \\____/  \n\n");
+		
+			System.out.println("\t \t                                                             :XMMMMMMMMMMMMMMMMMMMMMMMMKxdddddddddddddddddddddddddddddddddddddddddddONx.  \r\n" + 
+					"\t \t                                                             :XMMMMMMMMMMMMMMMMMMMMMMMMx.                                           :Xk.  \r\n" + 
+					"\t \t                                                             :XMMMMMMMMMMMMMMMMMMMMMMMMx.                                           :Xk.  \r\n" + 
+					"\t \t                                                             :XMMMMMMMMMMMMMMMMMMMMMMMMx.                                           :Xk.  \r\n" + 
+					"\t \t                                                             :XMMMMMMMMMMMMMMMMMMMMMMMMx.                                           :Xk.  \r\n" + 
+					"\t \t                                                             :XMMMMMMMMMMMMMMMMMMMMMMMM0c,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,;dNk.\n\n\n  ");
+			
+			cP.pararTiempo(tiempo);
+			cP.limpiar(lineas);
+		
+	}
+	
 	
 	public void imprimirMenuBienv() {
 		
